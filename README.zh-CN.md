@@ -213,7 +213,7 @@
 
 ## 第二轮 QA 系统
 
-这个仓库已经集成了 Codex 原生的 `critic/fixer` 模式。
+这个仓库已经集成了一个按当前 Codex 仓库结构改造的 `critic/fixer` 工作流。
 
 ### Agents
 

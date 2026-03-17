@@ -215,7 +215,7 @@ Default outputs:
 
 ## Second-Round QA System
 
-This repo includes a Codex-native port of the `critic/fixer` pattern.
+This repo includes a `critic/fixer` workflow adapted to the current Codex repository structure.
 
 ### Agents
 
