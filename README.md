@@ -91,7 +91,9 @@ Important:
 - merge the research workflow sections into your real `~/.codex/config.toml`
 - do not copy placeholder values like `your-api-key`
 
-### 3. Add the Core MCP Block
+### 3. Configure Zotero MCP
+
+If you want literature import, collection management, and PDF attachment, configure Zotero MCP.
 
 At minimum, add the Zotero MCP block below to your real `~/.codex/config.toml`:
 
@@ -108,18 +110,16 @@ ZOTERO_LIBRARY_TYPE = "user"
 UNPAYWALL_EMAIL = "you@example.com"
 ```
 
-This is the core MCP configuration that enables the literature workflows used in this repo.
+This is the minimum MCP configuration needed for the literature workflows used in this repo.
 
-### 4. Optional but Recommended: Zotero MCP
-
-If you want literature import, collection management, and PDF attachment, complete the full Zotero MCP setup.
+Then complete the full Zotero MCP setup, including installation, credentials, and local Zotero connectivity, by following:
 
 See:
 
 - `MCP_SETUP.md`
 - `MCP_SETUP.zh-CN.md`
 
-### 5. Start a Session in the Project Root
+### 4. Start a Session in the Project Root
 
 Open Codex from the project root so it loads `AGENTS.md`.
 
