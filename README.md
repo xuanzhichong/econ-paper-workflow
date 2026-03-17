@@ -116,8 +116,8 @@ Then complete the full Zotero MCP setup, including installation, credentials, an
 
 See:
 
-- `MCP_SETUP.md`
-- `MCP_SETUP.zh-CN.md`
+- [MCP_SETUP.md](MCP_SETUP.md)
+- [MCP_SETUP.zh-CN.md](MCP_SETUP.zh-CN.md)
 
 ### 4. Start a Session in the Project Root
 

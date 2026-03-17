@@ -114,8 +114,8 @@ UNPAYWALL_EMAIL = "you@example.com"
 
 参考：
 
-- `MCP_SETUP.md`
-- `MCP_SETUP.zh-CN.md`
+- [MCP_SETUP.md](MCP_SETUP.md)
+- [MCP_SETUP.zh-CN.md](MCP_SETUP.zh-CN.md)
 
 ### 4. 在项目根目录启动 Codex
 
