@@ -89,7 +89,26 @@
 - 你应当把研究工作流相关片段合并到真实的 `~/.codex/config.toml`
 - 不要把 `your-api-key` 这类占位符原样放进正式配置
 
-### 3. 可选但强烈推荐：配置 Zotero MCP
+### 3. 补上 MCP 服务器配置块
+
+至少把 Zotero MCP 的配置块合并到真实的 `~/.codex/config.toml`：
+
+```toml
+[mcp_servers.zotero]
+command = "zotero-mcp"
+args = ["serve"]
+enabled = true
+
+[mcp_servers.zotero.env]
+ZOTERO_API_KEY = "your-api-key"
+ZOTERO_LIBRARY_ID = "your-library-id"
+ZOTERO_LIBRARY_TYPE = "user"
+UNPAYWALL_EMAIL = "you@example.com"
+```
+
+这就是本仓库里文献工作流能够运行起来的核心 MCP 配置。
+
+### 4. 可选但强烈推荐：配置 Zotero MCP
 
 如果你想直接使用文献导入、collection 管理和 PDF 获取能力，配置 Zotero MCP。
 
@@ -98,7 +117,7 @@
 - `MCP_SETUP.md`
 - `MCP_SETUP.zh-CN.md`
 
-### 4. 在项目根目录启动 Codex
+### 5. 在项目根目录启动 Codex
 
 这样 Codex 才会自动读取项目级 `AGENTS.md`。
 
