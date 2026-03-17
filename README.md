@@ -1,6 +1,6 @@
-# Econ Scholar Workflow for Codex
+﻿# Econ Scholar Workflow for Codex
 
-Language: English | [中文](README.zh-CN.md)
+Language: English | [涓枃](README.zh-CN.md)
 
 An empirical-economics workflow layer for Codex, tuned for:
 
@@ -273,14 +273,6 @@ Use review-response to draft the letter, then run qa-response before finalizing 
 - `agents/`: specialized reviewer and worker prompts
 - `skills/`: workflow instructions and references
 - `quality_reports/`: QA outputs and report templates
-## Legacy ML Assets
-
-This repo still contains legacy ML materials, but they are no longer the default path.
-
-Use them only if you explicitly want an ML / AI workflow:
-
-- `skills/ml-paper-writing/templates/legacy-ml/README.md`
-- `skills/ml-paper-writing/references/legacy-ml/README.md`
 
 ## Current Scope
 
@@ -296,3 +288,5 @@ Not yet covered deeply:
 - full replication-package audit
 - dedicated critic/fixer for data cleaning
 - theory-economics workflows
+
+

@@ -1,145 +1,109 @@
-# Econ Scholar Workflow for Codex
+﻿# Econ Scholar Workflow for Codex
 
-这是一个面向 `实证微观 / 政策评估` 的 Codex 工作流覆写层，默认服务于：
-
-- 实证微观经济学
-- 政策评估
+杩欐槸涓€涓潰鍚?`瀹炶瘉寰 / 鏀跨瓥璇勪及` 鐨?Codex 宸ヤ綔娴佽鍐欏眰锛岄粯璁ゆ湇鍔′簬锛?
+- 瀹炶瘉寰缁忔祹瀛?- 鏀跨瓥璇勪及
 - `Stata + Python`
-- 论文写作、投稿前 QA、`R&R` 回复
+- 璁烘枃鍐欎綔銆佹姇绋垮墠 QA銆乣R&R` 鍥炲
 
-这个仓库不是独立程序，而是一套工作流配置包，主要由这些部分组成：
+杩欎釜浠撳簱涓嶆槸鐙珛绋嬪簭锛岃€屾槸涓€濂楀伐浣滄祦閰嶇疆鍖咃紝涓昏鐢辫繖浜涢儴鍒嗙粍鎴愶細
 
-- `AGENTS.md`：项目级路由和工作流规则
-- `agents/`：专门 agent 的提示词
-- `skills/`：可复用工作流说明
-- `config.example.toml`：Codex 配置示例
-- `quality_reports/`：QA 报告模板和输出目录
+- `AGENTS.md`锛氶」鐩骇璺敱鍜屽伐浣滄祦瑙勫垯
+- `agents/`锛氫笓闂?agent 鐨勬彁绀鸿瘝
+- `skills/`锛氬彲澶嶇敤宸ヤ綔娴佽鏄?- `config.example.toml`锛欳odex 閰嶇疆绀轰緥
+- `quality_reports/`锛歈A 鎶ュ憡妯℃澘鍜岃緭鍑虹洰褰?
+## 杩欏宸ヤ綔娴侀粯璁ゆ€庝箞鐞嗚В浣犵殑浠诲姟
 
-## 这套工作流默认怎么理解你的任务
+鍦ㄨ繖涓粨搴撻噷锛孋odex 榛樿鎸夌粡娴庡瀹炶瘉璇鐞嗚В浣犵殑璇锋眰锛?
+- 鈥滅粨鏋溾€濋粯璁ゆ槸鍥炲綊琛紝涓嶆槸 benchmark leaderboard
+- 鈥滃疄楠屸€濋粯璁ゆ槸瀹炶瘉璁捐锛屼笉鏄ā鍨嬭缁?- 鈥滆鏂団€濋粯璁ゆ槸缁忔祹瀛﹁鏂囩粨鏋勶紝涓嶆槸 AI conference 缁撴瀯
+- 鈥滃绋垮洖澶嶁€濋粯璁ゆ槸鏈熷垔 `R&R`锛屼笉鏄?conference rebuttal
 
-在这个仓库里，Codex 默认按经济学实证语境理解你的请求：
+榛樿鏍堟槸锛?
+- 鏂囩尞锛歚Google Scholar`銆乣RePEc`銆乣IDEAS`銆乣NBER`銆乣AEA journals`
+- 鍒嗘瀽锛歚Stata` 涓轰富锛宍Python` 鍋氳緟鍔?- 浜х墿锛歚literature-review.md`銆乣analysis-plan.md`銆乣regression-spec-matrix.md`銆乣response-letter.md`
 
-- “结果”默认是回归表，不是 benchmark leaderboard
-- “实验”默认是实证设计，不是模型训练
-- “论文”默认是经济学论文结构，不是 AI conference 结构
-- “审稿回复”默认是期刊 `R&R`，不是 conference rebuttal
+## 蹇€熷紑濮?
+### 1. 鎶婅繖涓粨搴撳綋鎴愬伐浣滄祦瑕嗗啓灞?
+杩欎笉鏄€滅洿鎺ヨ繍琛屸€濈殑浠撳簱锛岃€屾槸鐢ㄦ潵鍚堝苟杩涗綘鑷繁鐨?Codex 鐜銆?
+鍏抽敭鏂囦欢锛?
+- `AGENTS.md`锛氶」鐩骇璺敱鍜岃涓虹害鏉?- `config.example.toml`锛歛gent銆乫eature銆丮CP 鐨勯厤缃ず渚?- `agents/`锛氫笓闂?agent 鐨勭郴缁熸彁绀?- `skills/`锛氭湰鍦?workflow 璇存槑
 
-默认栈是：
+### 2. 閰嶇疆 Codex
 
-- 文献：`Google Scholar`、`RePEc`、`IDEAS`、`NBER`、`AEA journals`
-- 分析：`Stata` 为主，`Python` 做辅助
-- 产物：`literature-review.md`、`analysis-plan.md`、`regression-spec-matrix.md`、`response-letter.md`
+鎶?`config.example.toml` 褰撴垚鍙傝€冩ā鏉匡紝鐢ㄦ潵鍚堝苟杩欎簺鍐呭锛?
+- 寮€鍚?`multi_agent`
+- 寮€鍚?`memories`
+- 寮€鍚?`skill_approval`
+- 娉ㄥ唽 economics agents
+- 鍚敤 Zotero MCP
 
-## 快速开始
+娉ㄦ剰锛?
+- 褰撳墠浠撳簱閲岀殑 `config.example.toml` 浠嶇劧淇濈暀浜?model/provider 鐨勫崰浣嶇
+- 浣犲簲褰撴妸鐮旂┒宸ヤ綔娴佺浉鍏崇墖娈靛悎骞跺埌鐪熷疄鐨?`~/.codex/config.toml`
+- 涓嶈鎶?`your-api-key` 杩欑被鍗犱綅绗﹀師鏍锋斁杩涙寮忛厤缃?
+### 3. 鍙€変絾寮虹儓鎺ㄨ崘锛氶厤缃?Zotero MCP
 
-### 1. 把这个仓库当成工作流覆写层
-
-这不是“直接运行”的仓库，而是用来合并进你自己的 Codex 环境。
-
-关键文件：
-
-- `AGENTS.md`：项目级路由和行为约束
-- `config.example.toml`：agent、feature、MCP 的配置示例
-- `agents/`：专门 agent 的系统提示
-- `skills/`：本地 workflow 说明
-
-### 2. 配置 Codex
-
-把 `config.example.toml` 当成参考模板，用来合并这些内容：
-
-- 开启 `multi_agent`
-- 开启 `memories`
-- 开启 `skill_approval`
-- 注册 economics agents
-- 启用 Zotero MCP
-
-注意：
-
-- 当前仓库里的 `config.example.toml` 仍然保留了 model/provider 的占位符
-- 你应当把研究工作流相关片段合并到真实的 `~/.codex/config.toml`
-- 不要把 `your-api-key` 这类占位符原样放进正式配置
-
-### 3. 可选但强烈推荐：配置 Zotero MCP
-
-如果你想直接使用文献导入、collection 管理和 PDF 获取能力，配置 Zotero MCP。
-
-参考：
+濡傛灉浣犳兂鐩存帴浣跨敤鏂囩尞瀵煎叆銆乧ollection 绠＄悊鍜?PDF 鑾峰彇鑳藉姏锛岄厤缃?Zotero MCP銆?
+鍙傝€冿細
 
 - `MCP_SETUP.md`
 - `MCP_SETUP.zh-CN.md`
 
-### 4. 在项目根目录启动 Codex
+### 4. 鍦ㄩ」鐩牴鐩綍鍚姩 Codex
 
-这样 Codex 才会自动读取项目级 `AGENTS.md`。
-
-建议第一次会话直接这样说：
-
+杩欐牱 Codex 鎵嶄細鑷姩璇诲彇椤圭洰绾?`AGENTS.md`銆?
+寤鸿绗竴娆′細璇濈洿鎺ヨ繖鏍疯锛?
 ```text
-读取 AGENTS.md，把这个仓库当成经济学实证工作流。我现在在做 [topic]，请根据当前阶段帮我进入正确 workflow。
-```
+璇诲彇 AGENTS.md锛屾妸杩欎釜浠撳簱褰撴垚缁忔祹瀛﹀疄璇佸伐浣滄祦銆傛垜鐜板湪鍦ㄥ仛 [topic]锛岃鏍规嵁褰撳墠闃舵甯垜杩涘叆姝ｇ‘ workflow銆?```
 
-## 可用工作流
+## 鍙敤宸ヤ綔娴?
+### 闃舵 1锛氱爺绌舵瀯鎬濅笌鏂囩尞缁艰堪
 
-### 阶段 1：研究构思与文献综述
-
-使用：
-
+浣跨敤锛?
 - `research-ideation`
 - `literature-reviewer`
 
-输出：
-
+杈撳嚭锛?
 - `literature-review.md`
 - `identification-map.md`
 - `data-source-plan.md`
 - `research-design.md`
 
-适合：
+閫傚悎锛?
+- 鏀剁獎鐮旂┒闂
+- 姊崇悊璇嗗埆绛栫暐
+- 鍒ゆ柇鏂囩尞鏄惁宸茬粡楗卞拰
+- 璇勪及鏁版嵁鏄惁鍙緱
 
-- 收窄研究问题
-- 梳理识别策略
-- 判断文献是否已经饱和
-- 评估数据是否可得
+### 闃舵 2锛氭暟鎹璁′笌鍒嗘瀽瑙勫垝
 
-### 阶段 2：数据审计与分析规划
-
-使用：
-
+浣跨敤锛?
 - `results-analysis`
 - `data-analyst`
 
-输入：
-
+杈撳叆锛?
 - `.dta`
 - `.do`
 - `.log`
 - `.csv`
 - `.xlsx`
-- 回归表 `.tex`
+- 鍥炲綊琛?`.tex`
 
-输出：
-
+杈撳嚭锛?
 - `analysis-plan.md`
 - `regression-spec-matrix.md`
 - `table-shells.md`
 - `replication-checklist.md`
 
-适合：
-
-- 还原 do-file 执行顺序
-- 记录样本构造
-- 规划主回归
-- 设计稳健性和附录表
-
-### 阶段 3：论文写作
-
-使用：
-
+閫傚悎锛?
+- 杩樺師 do-file 鎵ц椤哄簭
+- 璁板綍鏍锋湰鏋勯€?- 瑙勫垝涓诲洖褰?- 璁捐绋冲仴鎬у拰闄勫綍琛?
+### 闃舵 3锛氳鏂囧啓浣?
+浣跨敤锛?
 - `ml-paper-writing`
 - `paper-miner`
 
-默认结构：
-
+榛樿缁撴瀯锛?
 1. `Introduction`
 2. `Institutional background / context`
 3. `Data`
@@ -150,41 +114,34 @@
 8. `Conclusion`
 9. `Appendix`
 
-经济学模板入口：
+缁忔祹瀛︽ā鏉垮叆鍙ｏ細
 
 - `skills/ml-paper-writing/templates/econ/README.md`
 
-### 阶段 4：投稿前 QA
+### 闃舵 4锛氭姇绋垮墠 QA
 
-使用：
+浣跨敤锛?
+- `paper-self-review`锛氶潤鎬佽嚜瀹?- `qa-paper`锛氫弗鏍?critic/fixer/verifier 闂幆
 
-- `paper-self-review`：静态自审
-- `qa-paper`：严格 critic/fixer/verifier 闭环
+褰撲綘闇€瑕佽繖浜涜兘鍔涙椂锛屼紭鍏堢敤 `qa-paper`锛?
+- 鏄庣‘鐨?go / no-go 鍒ゆ柇
+- 鎵撳垎
+- 澶氳疆 review-fix
+- 鎻愪氦鍓?hard gates
 
-当你需要这些能力时，优先用 `qa-paper`：
-
-- 明确的 go / no-go 判断
-- 打分
-- 多轮 review-fix
-- 提交前 hard gates
-
-### 阶段 5：R&R 与审稿回复
-
-使用：
-
+### 闃舵 5锛歊&R 涓庡绋垮洖澶?
+浣跨敤锛?
 - `review-response`
 - `rebuttal-writer`
 - `qa-response`
 
-默认输出：
-
+榛樿杈撳嚭锛?
 - `response-letter.md`
 - `comment-to-change-map.md`
 
-## 第二轮 QA 系统
+## 绗簩杞?QA 绯荤粺
 
-这个仓库已经集成了 Codex 原生的 `critic/fixer` 模式。
-
+杩欎釜浠撳簱宸茬粡闆嗘垚浜?Codex 鍘熺敓鐨?`critic/fixer` 妯″紡銆?
 ### Agents
 
 - `paper-critic`
@@ -198,99 +155,74 @@
 - `qa-paper`
 - `qa-response`
 
-### 循环
+### 寰幆
 
 ```text
-pre-flight -> critic -> fixer -> verifier -> 必要时继续 -> APPROVED 或最多 5 轮
-```
+pre-flight -> critic -> fixer -> verifier -> 蹇呰鏃剁户缁?-> APPROVED 鎴栨渶澶?5 杞?```
 
-### 阈值
-
+### 闃堝€?
 - `80` = commit-ready
 - `90` = submission-ready
 - `95` = excellence
 
 ### Hard Gates
 
-论文：
+璁烘枃锛?
+- 璇嗗埆閫昏緫閿欒
+- 鍏抽敭鏂囧瓧涓庤〃鏍间笉涓€鑷?- 寮曠敤涓嶅彲鏍搁獙鎴栧け鐪?- 缂哄皯鍩烘湰澶嶇幇璇存槑
 
-- 识别逻辑错误
-- 关键文字与表格不一致
-- 引用不可核验或失真
-- 缺少基本复现说明
-
-Response：
-
-- 漏回关键 referee 意见
-- 承诺修改但无法追踪
-- response 与 change map 不一致
-- 语气明显回避或误导
-
-报告会写入：
+Response锛?
+- 婕忓洖鍏抽敭 referee 鎰忚
+- 鎵胯淇敼浣嗘棤娉曡拷韪?- response 涓?change map 涓嶄竴鑷?- 璇皵鏄庢樉鍥為伩鎴栬瀵?
+鎶ュ憡浼氬啓鍏ワ細
 
 - `quality_reports/papers/`
 - `quality_reports/responses/`
 - `quality_reports/verifier/`
 
-## 实用提示词
+## 瀹炵敤鎻愮ず璇?
+### 浠庢枃鐚患杩板紑濮?
+```text
+鎴戞兂鐮旂┒ [topic]銆傝浣跨敤缁忔祹瀛﹀疄璇佸伐浣滄祦锛屽厛甯垜鍋氭枃鐚湴鍥俱€佽瘑鍒瓥鐣ユ⒊鐞嗗拰鍙敤鏁版嵁璇勪及銆?```
 
-### 从文献综述开始
+### 瀹¤涓€涓?Stata 椤圭洰
 
 ```text
-我想研究 [topic]。请使用经济学实证工作流，先帮我做文献地图、识别策略梳理和可用数据评估。
-```
+鎴戞湁涓€濂?do-file 鍜?dta銆傝杩樺師鏁版嵁娴佺▼銆佽瘑鍒?estimation sample锛屽苟鐢熸垚 regression-spec matrix銆?```
 
-### 审计一个 Stata 项目
-
-```text
-我有一套 do-file 和 dta。请还原数据流程、识别 estimation sample，并生成 regression-spec matrix。
-```
-
-### 写 Main Results
+### 鍐?Main Results
 
 ```text
-请根据这些回归结果，用 economics journal 风格起草 Main Results 和 Empirical Strategy。
-```
+璇锋牴鎹繖浜涘洖褰掔粨鏋滐紝鐢?economics journal 椋庢牸璧疯崏 Main Results 鍜?Empirical Strategy銆?```
 
-### 跑严格论文 QA
-
-```text
-对这个 draft 运行 qa-paper。我需要 hard gates、打分和明确的 submission-readiness 结论。
-```
-
-### 写并审查 R&R 回复
+### 璺戜弗鏍艰鏂?QA
 
 ```text
-先用 review-response 起草 response letter，再用 qa-response 做最终 QA。
-```
+瀵硅繖涓?draft 杩愯 qa-paper銆傛垜闇€瑕?hard gates銆佹墦鍒嗗拰鏄庣‘鐨?submission-readiness 缁撹銆?```
 
-## 仓库结构
+### 鍐欏苟瀹℃煡 R&R 鍥炲
 
-- `AGENTS.md`：项目级路由和质量规则
-- `config.example.toml`：Codex 配置示例
-- `agents/`：专门 reviewer / worker 提示词
-- `skills/`：工作流说明和参考资料
-- `quality_reports/`：QA 报告目录和模板
-## Legacy ML 资产
+```text
+鍏堢敤 review-response 璧疯崏 response letter锛屽啀鐢?qa-response 鍋氭渶缁?QA銆?```
 
-仓库里仍保留了一些 legacy ML 资料，但不再是默认路径。
+## 浠撳簱缁撴瀯
 
-只有在你明确要做 ML / AI 工作流时，才看这些入口：
+- `AGENTS.md`锛氶」鐩骇璺敱鍜岃川閲忚鍒?- `config.example.toml`锛欳odex 閰嶇疆绀轰緥
+- `agents/`锛氫笓闂?reviewer / worker 鎻愮ず璇?- `skills/`锛氬伐浣滄祦璇存槑鍜屽弬鑰冭祫鏂?- `quality_reports/`锛歈A 鎶ュ憡鐩綍鍜屾ā鏉?
 
-- `skills/ml-paper-writing/templates/legacy-ml/README.md`
-- `skills/ml-paper-writing/references/legacy-ml/README.md`
+## 褰撳墠鑼冨洿
 
-## 当前范围
+褰撳墠宸茬粡瑕嗙洊寰楁瘮杈冨ソ鐨勯儴鍒嗭細
 
-当前已经覆盖得比较好的部分：
-
-- 实证微观
-- 政策评估
+- 瀹炶瘉寰
+- 鏀跨瓥璇勪及
 - `Stata + Python`
-- 论文和 `R&R` 的 QA 闭环
+- 璁烘枃鍜?`R&R` 鐨?QA 闂幆
 
-当前还没有做深的部分：
+褰撳墠杩樻病鏈夊仛娣辩殑閮ㄥ垎锛?
+- 澶嶇幇鍖呯殑娣卞害瀹¤
+- 鏁版嵁娓呯悊 QA 鐨勭嫭绔?critic/fixer
+- 鐞嗚缁忔祹瀛﹀伐浣滄祦
 
-- 复现包的深度审计
-- 数据清理 QA 的独立 critic/fixer
-- 理论经济学工作流
+
+

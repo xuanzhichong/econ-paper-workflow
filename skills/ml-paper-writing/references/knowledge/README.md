@@ -8,5 +8,3 @@ Active files:
 - `writing-techniques.md`
 - `submission-guides.md`
 - `review-response.md`
-
-In the public package, legacy ML examples are intentionally omitted. Only the lightweight note at `../legacy-ml/README.md` is retained.
