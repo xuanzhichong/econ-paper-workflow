@@ -1,5 +1,7 @@
 # Econ Scholar Workflow for Codex
 
+Language: English | [中文](README.zh-CN.md)
+
 An empirical-economics workflow layer for Codex, tuned for:
 
 - empirical microeconomics
