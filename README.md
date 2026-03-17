@@ -24,6 +24,29 @@ This workflow is adapted from:
 
 It is released under the MIT License. Forks and workflow-specific adaptations are welcome.
 
+## Table of Contents
+
+- [What This Workflow Assumes](#what-this-workflow-assumes)
+- [Recommended Setup Path](#recommended-setup-path)
+- [Quick Start](#quick-start)
+- [The Working Workflow](#the-working-workflow)
+- [Second-Round QA System](#second-round-qa-system)
+- [Practical Prompts](#practical-prompts)
+- [Repository Layout](#repository-layout)
+- [Current Scope](#current-scope)
+
+## Recommended Setup Path
+
+If you want to adopt this repo for your own workflow, use this order:
+
+1. Read `AGENTS.md` and this README to confirm the workflow matches your research style.
+2. Merge the relevant sections from `config.example.toml` into your real `~/.codex/config.toml`.
+3. Copy or sync `agents/` and `skills/` into your Codex environment.
+4. Configure Zotero MCP if you need literature import, collection management, or PDF attachment.
+5. Open your research project in Codex so the project-level `AGENTS.md` is loaded.
+6. Start from the stage that matches your task: ideation, data audit, paper drafting, QA, or `R&R`.
+7. Fork the repo and adapt prompts, skills, and references to your own field or workflow if needed.
+
 ## What This Workflow Assumes
 
 By default, Codex should interpret your requests in an economics context:
