@@ -7,7 +7,7 @@ An empirical-economics workflow layer for Codex, tuned for:
 - empirical microeconomics
 - policy evaluation
 - `Stata + Python`
-- paper drafting, submission QA, and `R&R` response work
+- paper drafting, submission QA (quality review), and `R&R` response work
 
 This repository is not a standalone application. It is a workflow pack made of:
 
@@ -213,7 +213,7 @@ Default outputs:
 - `response-letter.md`
 - `comment-to-change-map.md`
 
-## Second-Round QA System
+## Second-Round QA (Quality Review) System
 
 This repo includes a `critic/fixer` workflow adapted to the current Codex repository structure.
 
