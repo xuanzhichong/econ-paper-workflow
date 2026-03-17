@@ -1,13 +1,13 @@
 ﻿# Econ Scholar Workflow for Codex
 
-这是一个面向 `实证微观 / 政策评估` 的 Codex 工作流覆写层，默认服务于：
+这是一个面向 `实证微观 / 政策评估` 的 Codex 工作流增强层，主要服务于：
 
 - 实证微观经济学
 - 政策评估
 - `Stata + Python`
 - 论文写作、投稿前 QA（质量审查）、`R&R` 回复
 
-这个仓库不是独立程序，而是一套工作流配置包，主要由这些部分组成：
+这个仓库不是独立程序，而是一套可并入 Codex 的工作流配置包，主要包括：
 
 - `AGENTS.md`：项目级路由和工作流规则
 - `agents/`：专门 agent 的提示词
@@ -20,7 +20,7 @@
 - `Galaxy-Dawn/claude-scholar`
 - `pedrohcgs/claude-code-my-workflow`
 
-本仓库采用 MIT 许可，也欢迎大家 fork 后按自己的研究或工作流继续适配。
+本仓库采用 MIT 许可，也欢迎大家 fork 后按自己的研究流程继续调整。
 
 ## 目录
 
@@ -35,19 +35,19 @@
 
 ## 推荐使用步骤
 
-如果你想把这套仓库接到自己的工作流里，建议按这个顺序使用：
+如果你想把这套仓库接到自己的工作流里，建议按下面的顺序使用：
 
 1. 先阅读 `AGENTS.md` 和本 README，确认它和你的研究方式一致。
 2. 把 `config.example.toml` 里的相关片段合并到真实的 `~/.codex/config.toml`。
 3. 将 `agents/` 和 `skills/` 同步到你的 Codex 环境。
 4. 如果需要文献导入、collection 管理和 PDF 获取，再配置 Zotero MCP。
-5. 在你的研究项目根目录启动 Codex，确保项目级 `AGENTS.md` 会被读取。
-6. 按你当前任务所在阶段进入对应 workflow：构思、数据审计、论文写作、QA 或 `R&R`。
-7. 如果你的领域或流程不同，直接 fork 本仓库后改 prompts、skills 和 references。
+5. 在你的研究项目根目录启动 Codex，确保它会读取项目级 `AGENTS.md`。
+6. 根据你当前任务所在阶段进入对应 workflow：构思、数据审计、论文写作、质量审查或 `R&R`。
+7. 如果你的领域或流程不同，直接 fork 本仓库后修改 prompts、skills 和 references。
 
 ## 这套工作流默认怎么理解你的任务
 
-在这个仓库里，Codex 默认按经济学实证语境理解你的请求：
+在这个仓库里，Codex 默认会按经济学实证语境理解你的请求：
 
 - “结果”默认是回归表，不是 benchmark leaderboard
 - “实验”默认是实证设计，不是模型训练
@@ -57,14 +57,14 @@
 默认栈是：
 
 - 文献：`Google Scholar`、`RePEc`、`IDEAS`、`NBER`、`AEA journals`
-- 分析：`Stata` 为主，`Python` 做辅助
+- 分析：以 `Stata` 为主，`Python` 用于辅助任务
 - 产物：`literature-review.md`、`analysis-plan.md`、`regression-spec-matrix.md`、`response-letter.md`
 
 ## 快速开始
 
 ### 1. 把这个仓库当成工作流覆写层
 
-这不是“直接运行”的仓库，而是用来合并进你自己的 Codex 环境。
+这不是一个“直接运行”的仓库，而是用来并入你自己的 Codex 环境。
 
 关键文件：
 
@@ -75,12 +75,12 @@
 
 ### 2. 配置 Codex
 
-把 `config.example.toml` 当成参考模板，用来合并这些内容：
+把 `config.example.toml` 当成合并时的参考模板：
 
 - 开启 `multi_agent`
 - 开启 `memories`
 - 开启 `skill_approval`
-- 注册 economics agents
+- 注册经济学相关 agents
 - 启用 Zotero MCP
 
 注意：
@@ -89,9 +89,9 @@
 - 你应当把研究工作流相关片段合并到真实的 `~/.codex/config.toml`
 - 不要把 `your-api-key` 这类占位符原样放进正式配置
 
-### 3. 补上 MCP 服务器配置块
+### 3. 补上核心 MCP 配置块
 
-至少把 Zotero MCP 的配置块合并到真实的 `~/.codex/config.toml`：
+至少把下面这段 Zotero MCP 配置合并到真实的 `~/.codex/config.toml`：
 
 ```toml
 [mcp_servers.zotero]
@@ -106,11 +106,11 @@ ZOTERO_LIBRARY_TYPE = "user"
 UNPAYWALL_EMAIL = "you@example.com"
 ```
 
-这就是本仓库里文献工作流能够运行起来的核心 MCP 配置。
+这段配置是本仓库文献工作流能够运行起来的核心前提。
 
 ### 4. 可选但强烈推荐：配置 Zotero MCP
 
-如果你想直接使用文献导入、collection 管理和 PDF 获取能力，配置 Zotero MCP。
+如果你希望使用文献导入、collection 管理和 PDF 获取能力，再继续完成 Zotero MCP 的完整配置。
 
 参考：
 
@@ -232,7 +232,7 @@ UNPAYWALL_EMAIL = "you@example.com"
 
 ## 第二轮 QA（质量审查）系统
 
-这个仓库已经集成了一个按当前 Codex 仓库结构改造的 `critic/fixer` 工作流。
+这个仓库集成了一套按当前 Codex 仓库结构改造的 `critic/fixer` 工作流。
 
 ### Agents
 
@@ -275,7 +275,7 @@ Response：
 - response 与 change map 不一致
 - 语气明显回避或误导
 
-报告会写入：
+报告会写入以下目录：
 
 - `quality_reports/papers/`
 - `quality_reports/responses/`
@@ -324,7 +324,7 @@ Response：
 
 ## 当前范围
 
-当前已经覆盖得比较好的部分：
+当前覆盖得比较好的部分：
 
 - 实证微观
 - 政策评估

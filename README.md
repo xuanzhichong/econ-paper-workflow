@@ -2,14 +2,14 @@
 
 Language: English | [中文](README.zh-CN.md)
 
-An empirical-economics workflow layer for Codex, tuned for:
+An empirical economics workflow layer for Codex, designed for:
 
 - empirical microeconomics
 - policy evaluation
 - `Stata + Python`
 - paper drafting, submission QA (quality review), and `R&R` response work
 
-This repository is not a standalone application. It is a workflow pack made of:
+This repository is not a standalone application. It is a workflow pack built around:
 
 - routing rules in `AGENTS.md`
 - agent prompts in `agents/`
@@ -17,12 +17,12 @@ This repository is not a standalone application. It is a workflow pack made of:
 - config examples in `config.example.toml`
 - report templates in `quality_reports/`
 
-This workflow is adapted from:
+This workflow builds on:
 
 - `Galaxy-Dawn/claude-scholar`
 - `pedrohcgs/claude-code-my-workflow`
 
-It is released under the MIT License. Forks and workflow-specific adaptations are welcome.
+It is released under the MIT License. Fork it and adapt it to your own workflow if useful.
 
 ## Table of Contents
 
@@ -37,19 +37,19 @@ It is released under the MIT License. Forks and workflow-specific adaptations ar
 
 ## Recommended Setup Path
 
-If you want to adopt this repo for your own workflow, use this order:
+If you want to adopt this repo in your own setup, follow this order:
 
 1. Read `AGENTS.md` and this README to confirm the workflow matches your research style.
 2. Merge the relevant sections from `config.example.toml` into your real `~/.codex/config.toml`.
 3. Copy or sync `agents/` and `skills/` into your Codex environment.
 4. Configure Zotero MCP if you need literature import, collection management, or PDF attachment.
-5. Open your research project in Codex so the project-level `AGENTS.md` is loaded.
-6. Start from the stage that matches your task: ideation, data audit, paper drafting, QA, or `R&R`.
+5. Open your research project in Codex so it loads the project-level `AGENTS.md`.
+6. Start from the workflow stage that matches your task: ideation, data audit, paper drafting, quality review, or `R&R`.
 7. Fork the repo and adapt prompts, skills, and references to your own field or workflow if needed.
 
 ## What This Workflow Assumes
 
-By default, Codex should interpret your requests in an economics context:
+By default, Codex interprets requests here in an empirical economics context:
 
 - "results" means regression tables, not benchmark leaderboards
 - "experiment" means empirical design, not model training
@@ -59,14 +59,14 @@ By default, Codex should interpret your requests in an economics context:
 The default stack is:
 
 - literature: `Google Scholar`, `RePEc`, `IDEAS`, `NBER`, `AEA journals`
-- analysis: `Stata` first, `Python` for support tasks
+- analysis: `Stata` as the primary tool, `Python` for support tasks
 - outputs: `literature-review.md`, `analysis-plan.md`, `regression-spec-matrix.md`, `response-letter.md`
 
 ## Quick Start
 
 ### 1. Treat This Repo As a Workflow Overlay
 
-This repo is meant to be merged into your Codex setup, not run by itself.
+This repo is meant to be merged into your Codex setup, not run on its own.
 
 Core files:
 
@@ -77,12 +77,12 @@ Core files:
 
 ### 2. Configure Codex
 
-Use `config.example.toml` as a reference for:
+Use `config.example.toml` as a reference when merging:
 
 - enabling `multi_agent`
 - enabling `memories`
 - enabling `skill_approval`
-- registering economics agents
+- registering economics-specific agents
 - enabling Zotero MCP
 
 Important:
@@ -91,9 +91,9 @@ Important:
 - merge the research workflow sections into your real `~/.codex/config.toml`
 - do not copy placeholder values like `your-api-key`
 
-### 3. Add the MCP Server Block
+### 3. Add the Core MCP Block
 
-At minimum, add the Zotero MCP block to your real `~/.codex/config.toml`:
+At minimum, add the Zotero MCP block below to your real `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.zotero]
@@ -108,11 +108,11 @@ ZOTERO_LIBRARY_TYPE = "user"
 UNPAYWALL_EMAIL = "you@example.com"
 ```
 
-This is the core MCP configuration that enables literature workflows in this repo.
+This is the core MCP configuration that enables the literature workflows used in this repo.
 
 ### 4. Optional but Recommended: Zotero MCP
 
-If you want literature-management and paper-import workflows, configure Zotero MCP.
+If you want literature import, collection management, and PDF attachment, complete the full Zotero MCP setup.
 
 See:
 
@@ -121,7 +121,7 @@ See:
 
 ### 5. Start a Session in the Project Root
 
-Open Codex in the project directory so it reads `AGENTS.md`.
+Open Codex from the project root so it loads `AGENTS.md`.
 
 Suggested first prompt:
 
@@ -277,7 +277,7 @@ Response:
 - response / change-map inconsistency
 - materially evasive tone
 
-Reports are written to:
+Reports are written under:
 
 - `quality_reports/papers/`
 - `quality_reports/responses/`
@@ -326,7 +326,7 @@ Use review-response to draft the letter, then run qa-response before finalizing 
 
 ## Current Scope
 
-Covered well:
+Currently covered well:
 
 - empirical microeconomics
 - policy evaluation
