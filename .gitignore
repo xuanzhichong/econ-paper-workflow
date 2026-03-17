@@ -1,0 +1,22 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Local credentials and config
+.env
+.env.*
+auth.json
+
+# Generated QA outputs
+quality_reports/papers/*.md
+quality_reports/responses/*.md
+quality_reports/verifier/*.md
+!quality_reports/papers/.gitkeep
+!quality_reports/responses/.gitkeep
+!quality_reports/verifier/.gitkeep
+!quality_reports/templates/
+
+# Python and cache files
+__pycache__/
+*.pyc

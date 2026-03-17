@@ -1,0 +1,85 @@
+# Econ Paper Workflow - Example Codex Configuration
+# Copy selected sections into your real ~/.codex/config.toml
+
+# ============================================================
+# Model & Provider (replace placeholders in your own config)
+# ============================================================
+model = "__MODEL__"
+model_provider = "__PROVIDER_NAME__"
+model_reasoning_effort = "medium"
+disable_response_storage = true
+
+[model_providers.__PROVIDER_NAME__]
+name = "__PROVIDER_NAME__"
+base_url = "__PROVIDER_URL__"
+wire_api = "responses"
+requires_openai_auth = true
+
+# ============================================================
+# Sandbox & Instructions
+# ============================================================
+sandbox_mode = "workspace-write"
+
+# ============================================================
+# Features
+# ============================================================
+[features]
+multi_agent = true
+memories = true
+skill_approval = true
+
+# ============================================================
+# MCP Servers (optional, enable after installing zotero-mcp)
+# ============================================================
+[mcp_servers.zotero]
+command = "zotero-mcp"
+args = ["serve"]
+enabled = false
+[mcp_servers.zotero.env]
+ZOTERO_API_KEY = "your-api-key"
+ZOTERO_LIBRARY_ID = "your-library-id"
+ZOTERO_LIBRARY_TYPE = "user"
+UNPAYWALL_EMAIL = "your-email@example.com"
+UNSAFE_OPERATIONS = "all"
+
+# ============================================================
+# Agents
+# ============================================================
+
+# --- Research Workflow ---
+
+[agents.literature-reviewer]
+description = "Empirical economics literature review with Zotero-backed source management"
+config_file = "~/.codex/agents/literature-reviewer/config.toml"
+
+[agents.data-analyst]
+description = "Stata-first empirical analysis for regressions, robustness checks, and table planning"
+config_file = "~/.codex/agents/data-analyst/config.toml"
+
+[agents.rebuttal-writer]
+description = "Economics journal referee-response and R&R drafting specialist"
+config_file = "~/.codex/agents/rebuttal-writer/config.toml"
+
+[agents.paper-miner]
+description = "Extract empirical economics writing patterns from papers and referee materials"
+config_file = "~/.codex/agents/paper-miner/config.toml"
+
+[agents.paper-critic]
+description = "Read-only critic for empirical economics manuscripts; flags identification, econometrics, writing, and replication risks"
+config_file = "~/.codex/agents/paper-critic/config.toml"
+
+[agents.paper-fixer]
+description = "Implements paper-critic findings conservatively and reports manuscript fixes"
+config_file = "~/.codex/agents/paper-fixer/config.toml"
+
+[agents.response-critic]
+description = "Read-only critic for economics referee responses and R&R letters"
+config_file = "~/.codex/agents/response-critic/config.toml"
+
+[agents.response-fixer]
+description = "Implements response-critic findings without widening the revision scope"
+config_file = "~/.codex/agents/response-fixer/config.toml"
+
+[agents.artifact-verifier]
+description = "Final verifier for paper and response QA loops with hard gates, scores, and stop conditions"
+config_file = "~/.codex/agents/artifact-verifier/config.toml"
