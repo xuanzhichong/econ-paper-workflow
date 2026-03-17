@@ -277,6 +277,7 @@ Use review-response to draft the letter, then run qa-response before finalizing 
 
 - `AGENTS.md`: project-level routing and quality rules
 - `config.example.toml`: example Codex config additions
+- `LICENSE`: MIT license for this workflow pack
 - `agents/`: specialized reviewer and worker prompts
 - `skills/`: workflow instructions and references
 - `quality_reports/`: QA outputs and report templates

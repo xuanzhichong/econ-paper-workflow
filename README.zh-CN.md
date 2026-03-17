@@ -275,17 +275,10 @@ Response：
 
 - `AGENTS.md`：项目级路由和质量规则
 - `config.example.toml`：Codex 配置示例
+- `LICENSE`：本工作流包采用的 MIT 许可证
 - `agents/`：专门 reviewer / worker 提示词
 - `skills/`：工作流说明和参考资料
 - `quality_reports/`：QA 报告目录和模板
-## Legacy ML 资产
-
-仓库里仍保留了一些 legacy ML 资料，但不再是默认路径。
-
-只有在你明确要做 ML / AI 工作流时，才看这些入口：
-
-- `skills/ml-paper-writing/templates/legacy-ml/README.md`
-- `skills/ml-paper-writing/references/legacy-ml/README.md`
 
 ## 当前范围
 
