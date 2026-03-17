@@ -19,8 +19,8 @@ This repository is not a standalone application. It is a workflow pack made of:
 
 This workflow is adapted from:
 
-- `Sellyew/claude-scholar`
-- `Sellyew/claude-code-my-workflow`
+- `Galaxy-Dawn/claude-scholar`
+- `pedrohcgs/claude-code-my-workflow`
 
 It is released under the MIT License. Forks and workflow-specific adaptations are welcome.
 

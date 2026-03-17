@@ -17,8 +17,8 @@
 
 这套工作流是在下面两个仓库基础上继续改造的：
 
-- `Sellyew/claude-scholar`
-- `Sellyew/claude-code-my-workflow`
+- `Galaxy-Dawn/claude-scholar`
+- `pedrohcgs/claude-code-my-workflow`
 
 本仓库采用 MIT 许可，也欢迎大家 fork 后按自己的研究或工作流继续适配。
 
