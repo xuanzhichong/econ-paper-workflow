@@ -38,7 +38,7 @@
 
 - `research-ideation`：研究问题、识别策略、数据来源、文献综述
 - `results-analysis`：Stata-first 数据处理、主回归、稳健性、表图输出
-- `ml-paper-writing`：经济学实证论文写作
+- `paper-writing`：经济学实证论文写作
 - `paper-self-review`：投稿前自审；严格审查或定稿前检查时转入 `qa-paper`
 - `review-response`：期刊 `referee response / R&R`；定稿审查时转入 `qa-response`
 - `qa-paper`：论文 critic/fixer/verifier 多轮质量闭环

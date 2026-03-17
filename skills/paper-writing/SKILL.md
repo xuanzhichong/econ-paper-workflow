@@ -1,12 +1,12 @@
 ---
-name: ml-paper-writing
+name: paper-writing
 description: Use when the user needs to draft or revise an empirical economics paper, write sections such as Introduction, Data, Empirical Strategy, Main Results, Mechanisms, Robustness, or prepare journal-ready appendices, JEL codes, and data/code disclosure notes. Handles Chinese prompts such as "实证论文", "识别策略", "主结果", "附录表", and "投稿修改".
 version: 1.1.0
 ---
 
 # Empirical Economics Paper Writing
 
-Keep the skill name for compatibility, but treat it as the writing workflow for empirical economics papers.
+This is the default writing workflow for empirical economics papers.
 
 ## Default Paper Structure
 

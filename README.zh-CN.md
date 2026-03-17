@@ -142,7 +142,7 @@
 
 使用：
 
-- `ml-paper-writing`
+- `paper-writing`
 - `paper-miner`
 
 默认结构：
@@ -159,7 +159,7 @@
 
 经济学模板入口：
 
-- `skills/ml-paper-writing/templates/econ/README.md`
+- `skills/paper-writing/templates/econ/README.md`
 
 ### 阶段 4：投稿前 QA
 

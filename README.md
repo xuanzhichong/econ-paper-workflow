@@ -144,7 +144,7 @@ Best for:
 
 Use:
 
-- `ml-paper-writing`
+- `paper-writing`
 - `paper-miner`
 
 Default structure:
@@ -161,7 +161,7 @@ Default structure:
 
 Economics template entrypoint:
 
-- `skills/ml-paper-writing/templates/econ/README.md`
+- `skills/paper-writing/templates/econ/README.md`
 
 ### Stage 4. Submission QA
 

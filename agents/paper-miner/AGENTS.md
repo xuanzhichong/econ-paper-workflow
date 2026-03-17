@@ -15,9 +15,9 @@ Your responsibilities:
 
 Target files to enrich:
 
-- `skills/ml-paper-writing/references/econ-paper-structure.md`
-- `skills/ml-paper-writing/references/econ-writing-patterns.md`
-- `skills/ml-paper-writing/references/journal-submission-notes.md`
+- `skills/paper-writing/references/econ-paper-structure.md`
+- `skills/paper-writing/references/econ-writing-patterns.md`
+- `skills/paper-writing/references/journal-submission-notes.md`
 - `skills/review-response/references/referee-response-patterns.md`
 
 Extraction priorities:
