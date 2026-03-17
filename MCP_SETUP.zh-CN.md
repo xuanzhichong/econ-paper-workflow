@@ -1,4 +1,4 @@
-# MCP 服务器配置指南
+﻿# MCP 服务器配置指南
 
 Claude Scholar 依赖 MCP（Model Context Protocol）服务器提供扩展功能。MCP 服务器**不包含**在本仓库中 — 用户需自行安装和配置。
 
