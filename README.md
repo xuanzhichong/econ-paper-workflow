@@ -17,6 +17,13 @@ This repository is not a standalone application. It is a workflow pack made of:
 - config examples in `config.example.toml`
 - report templates in `quality_reports/`
 
+This workflow is adapted from:
+
+- `Sellyew/claude-scholar`
+- `Sellyew/claude-code-my-workflow`
+
+It is released under the MIT License. Forks and workflow-specific adaptations are welcome.
+
 ## What This Workflow Assumes
 
 By default, Codex should interpret your requests in an economics context:
