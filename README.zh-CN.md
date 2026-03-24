@@ -26,6 +26,7 @@
 
 - [这套工作流默认怎么理解你的任务](#这套工作流默认怎么理解你的任务)
 - [推荐使用步骤](#推荐使用步骤)
+- [前置条件](#前置条件)
 - [快速开始](#快速开始)
 - [可用工作流](#可用工作流)
 - [第二轮 QA 系统](#第二轮-qa-系统)
@@ -39,11 +40,20 @@
 
 1. 先阅读 `AGENTS.md` 和本 README，确认它和你的研究方式一致。
 2. 把 `config.example.toml` 里的相关片段合并到真实的 `~/.codex/config.toml`。
-3. 将 `agents/` 和 `skills/` 同步到你的 Codex 环境。
+3. 将 `AGENTS.md`、`agents/` 和 `skills/` 同步到你的 Codex 环境。
 4. 如果需要文献导入、collection 管理和 PDF 获取，再配置 Zotero MCP。
 5. 在你的研究项目根目录启动 Codex，确保它会读取项目级 `AGENTS.md`。
 6. 根据你当前任务所在阶段进入对应 workflow：构思、数据审计、论文写作、质量审查或 `R&R`。
 7. 如果你的领域或流程不同，直接 fork 本仓库后修改 prompts、skills 和 references。
+
+## 前置条件
+
+把这套工作流并入 Codex 之前，建议先准备好：
+
+- [Codex CLI](https://github.com/openai/codex)
+- Git
+- 可选：Python 和 `uv`
+- 可选：Zotero Desktop 与 `zotero-mcp`，用于文献管理
 
 ## 这套工作流默认怎么理解你的任务
 
@@ -62,11 +72,13 @@
 
 ## 快速开始
 
-### 1. 把这个仓库当成工作流覆写层
+### 1. 把这个仓库当成精简公开包
 
 这不是一个“直接运行”的仓库，而是用来并入你自己的 Codex 环境。
 
-关键文件：
+这个公开包只保留默认启用的经济学层。
+
+优先同步这些内容：
 
 - `AGENTS.md`：项目级路由和行为约束
 - `config.example.toml`：agent、feature、MCP 的配置示例
@@ -88,6 +100,7 @@
 - 当前仓库里的 `config.example.toml` 仍然保留了 model/provider 的占位符
 - 你应当把研究工作流相关片段合并到真实的 `~/.codex/config.toml`
 - 不要把 `your-api-key` 这类占位符原样放进正式配置
+- 把 `AGENTS.md`、`agents/` 和 `skills/` 同步到你实际使用的 Codex 环境
 
 ### 3. 配置 Zotero MCP
 

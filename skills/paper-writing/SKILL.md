@@ -24,6 +24,10 @@ Use this section order unless the user specifies a journal template:
 
 If the paper is short, combine sections carefully. Do not collapse identification into vague "methods" language.
 
+The default template path is:
+
+- `templates/econ/`
+
 ## Writing Priorities
 
 Always keep these aligned:
@@ -103,6 +107,16 @@ For each core result:
 - separate main results from mechanisms and robustness
 
 Do not overstate mechanism evidence or treat heterogeneous correlations as structural proof.
+
+## Table Layout Standard
+
+Default to economics-journal table design:
+
+- one dependent variable or one specification family per column
+- `Controls`, `FE`, and clustering disclosed with `Yes/No` rows
+- `IV` results shown as `Panel A/B/C` or across separate reduced-form / first-stage / second-stage tables
+- adjusted columns should use a harmonized sample rule rather than silently changing `N`
+- if adjusted controls are substantively discussed, include a separate control-coefficient table in the main text or appendix
 
 ## Appendix and Disclosure
 

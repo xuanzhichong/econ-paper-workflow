@@ -28,6 +28,7 @@ It is released under the MIT License. Fork it and adapt it to your own workflow 
 
 - [What This Workflow Assumes](#what-this-workflow-assumes)
 - [Recommended Setup Path](#recommended-setup-path)
+- [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
 - [The Working Workflow](#the-working-workflow)
 - [Second-Round QA System](#second-round-qa-system)
@@ -41,11 +42,20 @@ If you want to adopt this repo in your own setup, follow this order:
 
 1. Read `AGENTS.md` and this README to confirm the workflow matches your research style.
 2. Merge the relevant sections from `config.example.toml` into your real `~/.codex/config.toml`.
-3. Copy or sync `agents/` and `skills/` into your Codex environment.
+3. Copy or sync `AGENTS.md`, `agents/`, and `skills/` into your Codex environment.
 4. Configure Zotero MCP if you need literature import, collection management, or PDF attachment.
 5. Open your research project in Codex so it loads the project-level `AGENTS.md`.
 6. Start from the workflow stage that matches your task: ideation, data audit, paper drafting, quality review, or `R&R`.
 7. Fork the repo and adapt prompts, skills, and references to your own field or workflow if needed.
+
+## Prerequisites
+
+Before merging this workflow into Codex, make sure you have:
+
+- [Codex CLI](https://github.com/openai/codex)
+- Git
+- optional: Python plus `uv`
+- optional: Zotero Desktop plus `zotero-mcp` for literature management
 
 ## What This Workflow Assumes
 
@@ -64,11 +74,13 @@ The default stack is:
 
 ## Quick Start
 
-### 1. Treat This Repo As a Workflow Overlay
+### 1. Treat This Repo As a Curated Public Overlay
 
 This repo is meant to be merged into your Codex setup, not run on its own.
 
-Core files:
+This public package only includes the default empirical-economics layer.
+
+Sync these files into Codex first:
 
 - `AGENTS.md`: project-level routing and workflow rules
 - `config.example.toml`: example registrations for agents and MCP
@@ -90,6 +102,7 @@ Important:
 - the checked-in `config.example.toml` contains template placeholders for model/provider setup
 - merge the research workflow sections into your real `~/.codex/config.toml`
 - do not copy placeholder values like `your-api-key`
+- copy `AGENTS.md`, `agents/`, and `skills/` into the Codex environment you actually use
 
 ### 3. Configure Zotero MCP
 

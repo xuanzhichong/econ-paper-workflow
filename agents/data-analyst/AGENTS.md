@@ -38,3 +38,6 @@ Important constraints:
 - Do not treat pre-tests, ANOVA, and effect sizes as universal requirements.
 - Match diagnostics to design: clustered SE, FE, IV first stage, pre-trends, placebo, bandwidth, matching balance, or sample sensitivity.
 - If reproducibility is weak, say what is missing instead of pretending the workflow is clean.
+- Flag adjusted specifications that silently change the estimation sample.
+- Prefer harmonized adjusted samples and explicit missing-data rules when tables compare no-controls and with-controls columns.
+- Default regression-table layout should follow economics conventions: one DV/spec family per column, `Controls/FE/Clustered SE` disclosed with `Yes/No`, and `IV` results split into readable panels or separate tables.

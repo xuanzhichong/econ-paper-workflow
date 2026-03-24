@@ -1,202 +1,112 @@
 ---
 name: citation-verification
-description: This skill provides reference guidance for citation verification in academic writing. Use when the user asks about "citation verification best practices", "how to verify references", "preventing fake citations", or needs guidance on citation accuracy. This skill supports paper-writing by providing detailed verification principles and common error patterns.
-tags: [Research, Academic, Citation, Reference]
-version: 0.1.0
+description: Use when the user needs to verify citations for an empirical economics paper, distinguish working-paper and published versions, check journal metadata, confirm DOI and venue information, or prevent invented references in economics writing.
+tags: [Economics, Citation, Verification, Journals, Working Papers]
+version: 0.2.0
 ---
 
-# Citation Verification Reference Guide
+# Citation Verification for Empirical Economics
 
-A reference guide for citation verification in academic paper writing, providing verification principles and best practices.
+Use this skill to verify citations for economics papers, referee responses, and appendices.
 
-**Core Principle**: Proactively verify every citation during the writing process using WebSearch and Google Scholar.
+## Default Source Hierarchy
 
-## Core Problems
+Prefer sources in this order unless the user asks otherwise:
 
-Citation issues in academic papers seriously impact research integrity:
+1. publisher page or DOI landing page
+2. `AEA`, `Econometrica`, `QJE`, `JPE`, `ReStud`, `EJ`, `JPubE`, `JHR`, `AEJ`, and field-journal websites
+3. `NBER`, `RePEc`, `IDEAS`, `SSRN`
+4. `Google Scholar` as a search aid
+5. `arXiv` only as a fallback for rare non-economics or cross-disciplinary citations
 
-1. **Fake citations** - Citing non-existent papers (common issue with AI-generated citations)
-2. **Incorrect information** - Mismatched authors, titles, years, etc.
-3. **Inconsistent formatting** - Mixed citation formats
-4. **Missing citations** - Referenced but uncited work
+Do not default to `arXiv-first`.
 
-These issues can lead to:
-- Paper rejection or retraction
-- Damage to academic reputation
-- Reviewers questioning research rigor
+## What to Verify
 
-**Special risk with AI-assisted writing**: AI-generated citations have approximately 40% error rate; every citation must be verified via WebSearch.
+For each citation, confirm:
 
-## Verification Principles
+- the paper exists
+- title, authors, year, and venue match
+- working-paper vs. published version is correctly identified
+- DOI or stable URL is available
+- the cited claim is actually supported by the source when the paper text relies on a specific result
 
-This skill provides verification principles based on WebSearch and Google Scholar:
+## Economics-Specific Rules
 
-### 1. Proactive Verification (Verify During Writing)
+### Working Paper vs. Published Paper
 
-**Core idea**: Verify immediately when adding a citation, rather than checking after writing is complete.
+Economics papers often circulate as:
 
-- Search for the paper via WebSearch each time a citation is needed
-- Confirm the paper exists on Google Scholar
-- Add to bibliography only after verification passes
+- working paper only
+- working paper plus journal publication
+- multiple versions across `NBER`, `SSRN`, `RePEc`, and publisher pages
 
-### 2. Google Scholar Verification
+Default rule:
 
-**Why Google Scholar**:
-- Most comprehensive academic literature coverage
-- Provides citation count (credibility indicator)
-- Directly provides BibTeX format
-- Free and no API required
+- cite the published version when it exists and is clearly the final paper the argument relies on
+- mention the working-paper series only when it is the relevant accessible version or when the discussion is explicitly about the working-paper stage
 
-**Verification steps**:
-1. WebSearch query: `"site:scholar.google.com [paper title] [first author]"`
-2. Confirm the paper appears in results
-3. Check citation count (abnormally low counts may indicate issues)
-4. Click "Cite" to get BibTeX
+### Series and Journal Metadata
 
-### 3. Information Matching Verification
+Common series and sources to distinguish carefully:
 
-**Information that must match**:
-- Title (minor differences allowed, e.g., capitalization)
-- Authors (at least the first author must match)
-- Year (±1 year difference allowed, considering preprints)
-- Publication venue (conference/journal name)
+- `NBER Working Paper`
+- `IZA Discussion Paper`
+- `CEPR Discussion Paper`
+- `SSRN Working Paper`
+- journal article in the final venue
 
-### 4. Claim Verification
+Do not collapse these into one another.
 
-**Key principle**: When citing a specific claim, you must confirm the claim actually appears in the paper.
+### Claim Verification
 
-- Use WebSearch to access the paper PDF
-- Search for relevant keywords
-- Confirm the accuracy of the claim
-- Record the section/page where the claim appears
+When citing a design, theorem, estimate, or specific empirical finding:
+
+- locate the exact paper version being cited
+- verify that the cited claim appears in that version
+- note the section, table, proposition, or page when useful for drafting
 
 ## Verification Workflow
 
-### Integration into Writing Process
-
-```
-Need a citation during writing
-    ↓
-WebSearch to find the paper
-    ↓
-Google Scholar to verify existence
-    ↓
-Confirm paper details
-    ↓
-Get BibTeX
-    ↓
-(If citing a specific claim) Verify the claim
-    ↓
-Add to bibliography
+```text
+Need a citation
+    ->
+Search by title + author
+    ->
+Confirm with publisher / DOI / NBER / RePEc / SSRN
+    ->
+Resolve working-paper vs published version
+    ->
+Verify claim if the draft relies on a specific result
+    ->
+Only then add to bibliography
 ```
 
-**Key point**: Verification is part of the writing process, not a separate post-processing step.
+## Failure Handling
 
-## Usage Guide
+If verification fails:
 
-### Using with paper-writing
-
-The verification principles of this skill are integrated into the Citation Workflow of the `paper-writing` skill.
-
-**Auto-trigger**: Citation verification is automatically executed when writing papers with the paper-writing skill.
-
-**Manual reference**: Refer to this skill when you need detailed verification principles.
-
-### Verification Step Example
-
-**Scenario**: Need to cite the Transformer paper
-
-```
-Step 1: WebSearch lookup
-Query: "Attention is All You Need Vaswani 2017"
-Result: Found multiple sources for the paper
-
-Step 2: Google Scholar verification
-Query: "site:scholar.google.com Attention is All You Need Vaswani"
-Result: ✅ Paper exists, 50,000+ citations, NeurIPS 2017
-
-Step 3: Confirm details
-- Title: "Attention is All You Need"
-- Authors: Vaswani, Ashish; Shazeer, Noam; Parmar, Niki; ...
-- Year: 2017
-- Venue: NeurIPS (NIPS)
-
-Step 4: Get BibTeX
-- Click "Cite" on Google Scholar
-- Select BibTeX format
-- Copy BibTeX entry
-
-Step 5: Add to bibliography
-- Paste into .bib file
-- Use \cite{vaswani2017attention} in the paper
-```
-
-### Handling Verification Failures
-
-**If the paper cannot be found on Google Scholar**:
-
-1. **Check spelling** - Is the title or author name correct?
-2. **Try different queries** - Use different keyword combinations
-3. **Find alternative sources** - Try arXiv, DOI
-4. **Mark as pending** - Use `[CITATION NEEDED]` marker
-5. **Notify the user** - Clearly state the citation cannot be verified
-
-**If information doesn't match**:
-
-1. **Confirm the source** - Did you find the correct paper?
-2. **Check versions** - Preprint vs. published version
-3. **Update information** - Use the most accurate version
-4. **Record discrepancies** - Note the reason for differences
+- do not guess
+- mark the citation as unresolved
+- tell the user whether the issue is missing paper, conflicting metadata, or unclear versioning
+- prefer `[CITATION NEEDED]` or a note in the draft over a fabricated reference
 
 ## Best Practices
 
-### Preventing Fake Citations
+- never generate economics citations from memory
+- separate journal version from working-paper version
+- use `Google Scholar` for discovery, not as the only source of truth
+- prioritize DOI and publisher metadata when available
+- keep citation text and bibliography aligned with the version actually discussed
 
-1. **Never generate citations from memory** - AI-generated citations have 40% error rate
-2. **Use WebSearch to find** - Verify every citation through WebSearch
-3. **Confirm on Google Scholar** - Verify paper existence on Google Scholar
-4. **Verify promptly** - Verify when adding citations, don't wait until finished
+## Integration
 
-### Handling Verification Failures
+This skill supports:
 
-1. **Don't guess** - If you can't find the paper, don't fabricate information
-2. **Mark clearly** - Use `[CITATION NEEDED]` to mark explicitly
-3. **Notify the user** - Clearly state which citations cannot be verified
-4. **Provide reasons** - Explain why verification failed (not found, info mismatch, etc.)
+- `paper-writing`
+- `review-response`
+- `paper-self-review`
+- `qa-paper`
+- `qa-response`
 
-### Improving Verification Accuracy
-
-1. **Complete queries** - Include title, author, year
-2. **Check citation count** - Citation count on Google Scholar is a credibility indicator
-3. **Confirm venue** - Verify conference/journal name is correct
-4. **Verify claims** - When citing specific claims, confirm they exist in the paper
-
-### Common Pitfalls
-
-❌ **Wrong approach**:
-- Generating BibTeX from memory
-- Skipping Google Scholar verification
-- Assuming a paper exists
-- Not marking unverifiable citations
-
-✅ **Correct approach**:
-- Search every citation with WebSearch
-- Confirm on Google Scholar
-- Copy BibTeX from Google Scholar
-- Clearly mark unverifiable citations
-
-## Summary
-
-**Core Principle**: Proactively verify every citation during the writing process using WebSearch and Google Scholar.
-
-**Key Steps**:
-1. WebSearch to find the paper
-2. Google Scholar to verify existence
-3. Confirm details
-4. Get BibTeX
-5. Verify claims (if needed)
-6. Add to bibliography
-
-**Failure handling**: When verification fails, mark as `[CITATION NEEDED]` and clearly notify the user.
-
-**Integration**: The principles of this skill are integrated into the paper-writing skill for automatic verification.
+Use the older `arXiv`-oriented logic only for explicit non-economics requests.

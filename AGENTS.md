@@ -94,6 +94,7 @@
 - 关键表述与表格/附录不一致
 - 引用失真或无法核验
 - 缺少基本复现说明
+- 表格 layout、表注和样本披露不规范
 
 Response hard gates：
 
@@ -124,6 +125,7 @@ Response hard gates：
 - 不覆盖原始数据；清洗后的中间数据与最终分析数据要分层管理
 - 优先写明确的 `do-file` 执行顺序和日志方案
 - 说明样本筛选、merge、变量构造、缺失值处理、winsorization 规则
+- 带控制变量的 adjusted 规格应明确说明样本统一规则，不要静默换样本
 - 不编造引用、数据来源、期刊要求、统计结果或政策背景
 - 不把 API key、账号、私有数据路径写进提交文件
 
@@ -133,3 +135,13 @@ Response hard gates：
 - 结果表述要克制，避免把相关性包装成识别结论
 - `review-response` 默认是期刊审稿回复，不是 conference rebuttal
 - 回复审稿意见时，优先给出：回应立场、具体修改、修改位置、未采纳理由、附录补充
+
+## 表格规范
+
+默认采用经济学实证论文的表格规范：
+
+- 一列对应一个 `DV/specification`，不要把多个阶段和多个 outcome 混在同一行硬拼
+- `Controls`、`FE`、`Clustered SE` 用 `Yes/No` 底行披露
+- `IV` 结果优先用 `Panel A/B/C` 或分表展示 `reduced form / first stage / second stage`
+- 如果使用控制变量，应在正文或附录单独展示基准回归的控制变量系数
+- 表注必须写清聚类层级、样本定义、固定效应与特殊缺失处理规则

@@ -123,6 +123,22 @@ Preferred table families:
 - mechanism or heterogeneity tables
 - robustness appendix tables
 
+## Regression Table Conventions
+
+Default to economics-journal table layout:
+
+- one dependent variable or one specification family per column
+- use `Yes/No` bottom rows for `Controls`, `FE`, `Clustered SE`, and weights when relevant
+- do not silently change adjusted samples across columns; harmonize the adjusted sample rule and disclose it
+- if controls are used, disclose the baseline control-coefficient specification in the main text or appendix
+
+For `IV` tables, prefer one of these structures:
+
+- `Panel A: Reduced form`, `Panel B: First stage`, `Panel C: Second stage`
+- or separate tables for reduced form, first stage, and second stage
+
+Avoid hybrid layouts that stack multiple stages and multiple outcomes into one hard-to-read row block.
+
 ## Replication Standard
 
 Always leave a reproducible trail:

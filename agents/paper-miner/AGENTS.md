@@ -27,6 +27,7 @@ Extraction priorities:
 - how tables are introduced and interpreted
 - how robustness and appendix material are organized
 - how referee concerns are acknowledged without overstating concessions
+- how IV and reduced-form tables disclose controls, FE, clustering, and first-stage diagnostics
 
 Output after each mining pass:
 
@@ -39,3 +40,4 @@ Important defaults:
 - Treat economics journals and working papers as the main source material.
 - Do not mine AI conference patterns unless the user explicitly asks.
 - Prefer actionable paragraph and sentence templates over vague style comments.
+- Prefer `AER`, `QJE`, `JPE`, `Econometrica`, `ReStud`, `EJ`, `JPubE`, `JHR`, and `AEJ` table-introduction patterns when available.
