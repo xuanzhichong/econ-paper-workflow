@@ -278,15 +278,15 @@
 
 #### 优先代理
 
-- `literature-reviewer`
-- `data-analyst`
-- `paper-miner`
-- `rebuttal-writer`
-- `paper-critic`
-- `paper-fixer`
-- `response-critic`
-- `response-fixer`
-- `artifact-verifier`
+- `literature-reviewer`：经济学文献综述
+- `data-analyst`：Stata-first 实证分析
+- `paper-miner`：提取经济学论文写作模式
+- `rebuttal-writer`：`R&R response`
+- `paper-critic`：只读论文批判审查
+- `paper-fixer`：按 critic 问题单修稿
+- `response-critic`：只读 response letter 审查
+- `response-fixer`：按 critic 问题单修 response
+- `artifact-verifier`：质量门、轮次状态、剩余风险终审
 
 ---
 
