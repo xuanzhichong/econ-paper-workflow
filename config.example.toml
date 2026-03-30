@@ -1,3 +1,10 @@
+#这个文件**不是纯阅读性的说明**，但你现在看到的这份 **`config.example.toml` 本身又不是直接生效的最终配置**。  
+#最准确的理解是：
+#- **`config.example.toml`**：主要是一个 **可执行配置模板**，本身更像“样板”
+#- **真正起作用的是你复制并改好的 `~/.codex/config.toml`**
+#- 所以它既不是单纯说明文档，也不是“拿来就自动生效”的文件  
+#- 它的作用是：**告诉系统应该怎么运行你的工作流**
+
 # Econ Paper Workflow - Example Codex Configuration
 # Copy selected sections into your real ~/.codex/config.toml
 
