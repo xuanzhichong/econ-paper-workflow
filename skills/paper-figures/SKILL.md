@@ -1,31 +1,39 @@
 ---
 name: paper-figures
-description: Use when the user wants to turn empirical economics or agricultural economics results into publication-ready figures using R. Default workflow assumes Stata handles data cleaning, sample construction, and econometric estimation, while R handles figure data import, visualization, multi-panel layout, styling, and export. Handles Chinese prompts such as "画图", "可视化", "event study 图", "系数图", "拼图", and "Nature 风格图片".
-version: 0.1.0
+description: Use when the user wants to turn Stata-processed empirical economics or agricultural economics data into publication-ready descriptive figures using R. Default workflow assumes Stata handles data cleaning, sample construction, and variable generation, then exports `.dta` files; R imports the processed `.dta` files and focuses on figure production, multi-panel layout, styling, and export. Handles Chinese prompts such as "画图", "描述性图片", "发展趋势图", "拼图", "结构变化图", "空间分布图", and "Nature 风格图片".
+version: 0.2.0
 ---
 
 # Paper Figures for Empirical Economics and Agricultural Economics
 
-Use this skill when the user wants to produce **journal-ready figures** from empirical economics or agricultural economics results.
+Use this skill when the user wants to produce **journal-ready descriptive figures** from empirical economics or agricultural economics data using `R`.
 
 Default workflow:
 
-- `Stata` handles raw-data cleaning, merging, sample construction, variable generation, and econometric estimation
-- `R` handles figure data intake, reshaping for plotting, visualization, panel composition, annotation, and export
+- `Stata` handles raw-data cleaning, merging, sample construction, variable generation, and exports processed `.dta` files
+- `R` imports the processed `.dta` files and handles figure construction, panel composition, styling, annotation, and export
 
-This skill is for **paper figures**, not for general-purpose R programming, dashboard building, or ML experiment visualization.
+This skill is for **paper figures**, especially **descriptive and trend-oriented figures**, not for general-purpose R programming, dashboard building, or ML experiment visualization.
+
+It also does **not** default to regression-result visualization.  
+If the user explicitly wants coefficient plots or event-study figures, that can still be done, but it is not the primary default of this skill.
+
+---
 
 ## Core Principle
 
 Figures should serve one or more of the following functions:
 
-1. clarify the identifying design
-2. summarize a main empirical result
-3. reveal dynamic treatment effects
-4. present heterogeneity or mechanism evidence clearly
-5. show descriptive patterns that support, but do not replace, the regression evidence
+1. show descriptive patterns clearly
+2. present development trends over time
+3. compare groups, regions, or categories
+4. reveal structural shifts in outcomes, composition, or distributions
+5. summarize sample patterns that support the paper’s empirical narrative
+6. provide publication-ready visual evidence that complements, but does not replace, regression tables
 
-A figure should make the argument **clearer than a table alone could**, not merely more decorative.
+A figure should make the empirical narrative **clearer than text or a raw table alone could**, not merely more decorative.
+
+---
 
 ## Default Figure Standard
 
@@ -47,14 +55,18 @@ This means:
 - balanced whitespace
 - consistent line widths, point sizes, and font sizes
 - polished multi-panel alignment
-- captions and notes that make the figure interpretable without overselling the result
+- captions and notes that make the figure interpretable without exaggeration
+
+---
 
 ## Default Workflow
 
 ```text
 Clarify figure purpose
     ->
-Audit Stata output and identify plot-ready data
+Import processed `.dta` from Stata
+    ->
+Audit figure-ready variables and labels
     ->
 Define figure type and panel logic
     ->
@@ -69,137 +81,180 @@ Export with stable filename and journal-ready dimensions
 Draft caption and figure note
 ```
 
+---
+
 ## What This Skill Should Produce
 
 Typical outputs include:
 
+- complete runnable `R` code for the figure
 - `figure-plan.md`
 - `figure-spec-sheet.md`
 - `figure-caption-sheet.md`
-- complete runnable `R` code for the figure
 - publication-ready outputs such as `.pdf`, `.svg`, or high-resolution `.png` when requested
 
-Generate only what is needed for the user's task.  
-If the user asks only for plotting code, prioritize a complete runnable R script.
+Generate only what is needed for the user’s task.  
+If the user asks only for plotting code, prioritize a **complete runnable R script**.
+
+---
 
 ## Default Inputs
 
 This skill expects inputs such as:
 
-- `Stata` regression outputs
-- plot-ready `.dta`, `.csv`, or `.xlsx` exported from `Stata`
-- coefficient tables
-- event-study output tables
+- processed `.dta` files exported from `Stata`
 - descriptive summary tables
-- map shapefiles or spatial data if needed
-- user-provided figure sketches or screenshots
+- grouped or collapsed data already prepared in `Stata`
+- region-year, household-year, county-year, or other analysis-ready descriptive datasets
+- figure sketches or screenshots from the user
 - journal target or style preference if available
 
-Do **not** assume that `R` will do the main cleaning.  
-If data are not yet plot-ready, the default recommendation is:
+Preferred input style:
 
-- prepare the plot-ready dataset in `Stata`
-- then use `R` for visualization
+- `Stata` prepares the processed data
+- `R` imports the `.dta` file and focuses on plotting
+
+Do **not** assume that `R` will do the main cleaning.  
+If the input dataset is still not plotting-ready, the default recommendation is:
+
+- finalize the dataset structure in `Stata`
+- then use `R` for figure production
+
+---
 
 ## Default Figure Families
 
 Prioritize these figure families for empirical economics and agricultural economics papers.
 
-### 1. Event-study figures
+### 1. Development trend plots
 
-Use when the paper estimates dynamic treatment effects.
+Use when the paper needs to show:
+
+- trends over time
+- pre/post evolution of descriptive outcomes
+- long-run development trajectories
+- group-based temporal comparisons
 
 Typical requirements:
 
-- coefficient by relative time
-- 95% confidence intervals
-- omitted period clearly labeled
-- treatment timing or policy year visually marked where relevant
-- grouped leads/lags disclosed if used
-- y-axis units clearly stated
+- year or period on the x-axis
+- clear units on the y-axis
+- readable group differentiation
 - no misleading smoothing
+- trend lines or point-line combinations chosen for clarity
 
-### 2. Coefficient plots
+---
 
-Use when the paper needs to compare:
+### 2. Group comparison plots
 
-- baseline vs robustness estimates
-- subgroup effects
-- mechanism estimates
-- multiple outcomes with the same treatment
+Use when comparing:
+
+- regions
+- treatment vs control descriptive means
+- rural vs urban groups
+- income groups
+- household types
+- sectoral or category differences
 
 Typical requirements:
 
-- point estimate plus confidence interval
-- stable ordering across panels
-- comparable axis scales when substantive comparison matters
-- labels with economic meaning, not raw variable names
+- labels with economic meaning
+- comparable scales
+- clear legend or direct labeling
+- avoid overloaded grouped bars when line or dot plots would be clearer
 
-### 3. Descriptive trend plots
+---
+
+### 3. Composition or structure plots
+
+Use when the paper needs to show:
+
+- expenditure or intake structure
+- composition shares
+- category contribution
+- structural change over time
+- source breakdowns
+
+Typical requirements:
+
+- categories ordered meaningfully
+- shares or levels clearly labeled
+- color used sparingly and consistently
+- stacked figures used only when the comparison remains readable
+
+---
+
+### 4. Distribution and density figures
 
 Use when showing:
 
-- treated vs control raw trends
-- pre-policy evolution
-- stylized facts that motivate the design
-- outcome evolution over time
+- sample distributions
+- support
+- skewness
+- cross-group distribution differences
+- trimmed or restricted descriptive patterns
 
 Typical requirements:
 
-- clear distinction between descriptive and causal evidence
-- sample and aggregation level disclosed
-- raw vs adjusted series labeled clearly
+- axis scales that remain interpretable
+- no visually misleading bandwidth choices
+- subgroup definitions stated clearly
+- distribution plots used only when they help answer a descriptive question
 
-### 4. Heterogeneity forest / interval plots
+---
 
-Use when subgroup comparison is central.
+### 5. Maps and spatial descriptive figures
 
-Typical requirements:
-
-- subgroup labels with theoretical meaning
-- point estimate plus interval
-- no overloaded legend
-- avoid implying significance differences where only point differences are shown
-
-### 5. Mechanism figures
-
-Use sparingly.
-
-Typical requirements:
-
-- should support interpretation, not substitute for identification
-- visual logic should match the mechanism specification
-- wording and caption should remain cautious
-
-### 6. Maps and spatial figures
-
-Use when spatial allocation, rollout, clustering, or geographic heterogeneity matters.
+Use when spatial allocation, regional disparity, clustering, or geographic patterns matter.
 
 Typical requirements:
 
 - clean projection and region boundaries
 - readable labels
 - restrained color use
-- spatial meaning explained clearly
+- region names or codes consistent with the manuscript
 - avoid decorative mapping without analytical purpose
 
-### 7. Multi-panel composite figures
+---
 
-Use when several related figures belong together.
+### 6. Multi-panel composite figures
+
+Use when several related descriptive figures belong together.
 
 Typical requirements:
 
-- consistent theme and scales where appropriate
+- consistent theme across panels
+- aligned axes when comparison matters
 - panel labels such as `(a)`, `(b)`, `(c)`
 - balanced spacing
 - one coherent caption structure
+
+---
+
+### 7. Sample flow or descriptive pipeline figures
+
+Use when the paper benefits from showing:
+
+- sample reductions
+- subgroup construction
+- analytic sample derivation
+- data coverage by stage
+
+Typical requirements:
+
+- simple and readable structure
+- one-direction visual logic
+- counts clearly stated
+- no unnecessary decoration
+
+---
 
 ## Stata-to-R Division of Labor
 
 Default rule:
 
-- `Stata` should produce the **figure-ready dataset**
-- `R` should produce the **figure-ready graphic**
+- `Stata` should produce the **processed `.dta` file**
+- `R` should produce the **publication-ready graphic**
 
 ### Stata should usually handle
 
@@ -207,13 +262,13 @@ Default rule:
 - merge / append / reshape for analysis
 - sample selection
 - variable construction
-- estimation
-- exporting regression results or plot data
-- collapsing or reshaping into a plot-ready table when needed
+- aggregation or collapsing when needed
+- label preparation when useful
+- exporting the processed `.dta`
 
 ### R should usually handle
 
-- importing figure-ready data
+- importing `.dta`
 - light reshaping for plotting
 - ordering factors and labels
 - plotting
@@ -223,6 +278,8 @@ Default rule:
 - export
 
 Do not silently rebuild the analytical sample in `R` unless the user explicitly wants that.
+
+---
 
 ## Nature-Style Figure Defaults
 
@@ -242,13 +299,13 @@ When the user asks for figures that match **Nature** or **Nature-subjournal** st
 - avoid overly saturated colors
 - ensure the figure remains interpretable in grayscale
 - use color to distinguish analytically meaningful groups, not decoration
-- for event-study and coefficient plots, let intervals remain legible and secondary to the point estimate
+- descriptive categories should use consistent color logic across related figures
 
 ### Lines and points
 
 - line widths should be readable but not heavy
 - point sizes should be visible but not bulky
-- confidence intervals should be easy to read and not overpower the figure
+- emphasis should come from structure, not visual noise
 - reference lines should be subtle but visible
 
 ### Axes and scales
@@ -262,7 +319,7 @@ When the user asks for figures that match **Nature** or **Nature-subjournal** st
 
 - direct labeling is preferred when it improves readability
 - legends should be concise and harmonized with text terminology
-- subgroup names should match the manuscript exactly
+- group names should match the manuscript exactly
 
 ### Export
 
@@ -272,6 +329,8 @@ Preferred formats by default:
 - high-resolution raster only when required
 - stable figure dimensions for one-column or two-column layouts
 - reproducible export code in the R script
+
+---
 
 ## Figure Planning Rules
 
@@ -288,9 +347,11 @@ Before writing code, define:
   - linetype
   - point shape
   - facet / panel
-- whether the figure is descriptive or tied directly to an estimating result
+- whether the figure is purely descriptive or supports a broader empirical narrative
 
-A figure is not ready to code until its analytical purpose is clear.
+A figure is not ready to code until its descriptive and narrative purpose is clear.
+
+---
 
 ## Caption and Note Discipline
 
@@ -299,13 +360,15 @@ A good figure caption or note should state, as relevant:
 - what is plotted
 - sample
 - unit of observation
-- estimator or construction
-- confidence interval or standard error type
-- omitted period / cutoff / normalization
-- whether the figure is descriptive or regression-based
-- panel meanings if multi-panel
+- construction or aggregation rule
+- subgroup or panel meanings
+- time window if relevant
+- whether the figure is descriptive
+- any transformation or normalization if used
 
-Do not let captions overclaim causality relative to the design.
+Do not let captions overclaim causal interpretation for descriptive figures.
+
+---
 
 ## Writing Discipline for Figures
 
@@ -313,32 +376,37 @@ Figures should be described in manuscript prose using disciplined language.
 
 Preferred patterns include:
 
-- `Figure X presents the event-study estimates around ...`
-- `The pre-treatment coefficients provide no strong evidence of ...`
-- `The graphical pattern is consistent with the regression results in Table X.`
-- `These subgroup patterns should be interpreted as supportive rather than definitive evidence.`
+- `Figure X shows the evolution of ... over time.`
+- `Figure X compares ... across regions / groups / categories.`
+- `The figure reveals a clear upward / downward / diverging pattern in ...`
+- `The descriptive pattern is consistent with the broader empirical discussion in Section X.`
+- `These descriptive differences should be interpreted as contextual rather than causal evidence.`
 
 Avoid:
 
 - benchmark language
 - decorative interpretation
 - stronger causal claims in the figure caption than in the text
-- using the figure to imply a claim the regression design does not support
+- treating a descriptive figure as if it identified an effect by itself
+
+---
 
 ## Common Figure Risks
 
 Watch for the following:
 
-- omitted period not labeled in event-study figures
+- overloading a figure with too many groups
 - incomparable axis scales across supposedly comparable panels
 - overloaded legends
 - colors that fail in grayscale
-- coefficient plots combining fundamentally different specifications
+- stacked figures that obscure meaningful comparison
 - map figures with weak analytical purpose
 - multi-panel figures with inconsistent themes
 - captions too vague to decode the figure
-- figure titles that overstate causality
-- `R` code that silently reconstructs the sample differently from `Stata`
+- figure titles that overstate interpretation
+- `R` code that silently changes the sample or variable definitions relative to `Stata`
+
+---
 
 ## Recommended R Ecosystem
 
@@ -347,7 +415,6 @@ Default packages may include, as needed:
 - `ggplot2`
 - `dplyr`
 - `tidyr`
-- `readr`
 - `haven`
 - `patchwork`
 - `cowplot`
@@ -355,7 +422,6 @@ Default packages may include, as needed:
 - `showtext`
 - `scales`
 - `grid`
-- `gridExtra`
 - `forcats`
 - `stringr`
 - `ggrepel`
@@ -367,13 +433,15 @@ Default packages may include, as needed:
 Do not load many packages without purpose.  
 Prefer a lean, transparent figure script.
 
+---
+
 ## Default Output Discipline
 
 When generating R scripts or figure plans, default to:
 
 - one script per major figure, or one script per tightly related figure family
 - stable file names that match manuscript figure numbering when possible
-- explicit import path for plot-ready data
+- explicit import path for the `.dta` file
 - explicit export path
 - clearly separated:
   - setup
@@ -382,27 +450,35 @@ When generating R scripts or figure plans, default to:
   - plotting
   - export
 
+---
+
 ## Example Output Naming
 
 Preferred examples:
 
-- `fig1_descriptive_trends.R`
-- `fig2_event_study.R`
-- `fig3_heterogeneity_plot.R`
-- `figA1_placebo_event_study.R`
+- `fig1_trend_plot.R`
+- `fig2_group_comparison.R`
+- `fig3_structure_change.R`
+- `fig4_spatial_map.R`
+- `figA1_sample_distribution.R`
 
 Exported outputs:
 
-- `fig1_descriptive_trends.pdf`
-- `fig2_event_study.pdf`
-- `fig3_heterogeneity_plot.pdf`
-- `figA1_placebo_event_study.pdf`
+- `fig1_trend_plot.pdf`
+- `fig2_group_comparison.pdf`
+- `fig3_structure_change.pdf`
+- `fig4_spatial_map.pdf`
+- `figA1_sample_distribution.pdf`
+
+---
 
 ## What This Skill Should Not Default To
 
 Do not default to:
 
 - raw-data cleaning in `R`
+- regression-result visualization
+- coefficient plotting as the main use case
 - benchmark-style ML figures
 - TensorBoard-like plots
 - decorative infographics
@@ -411,14 +487,18 @@ Do not default to:
 - unexplained smoothing or arbitrary transformations
 - Nature styling as mere color mimicry without analytical clarity
 
+---
+
 ## When To Recommend Appendix Placement
 
 Prefer appendix placement when:
 
-- the figure is mainly a robustness supplement
+- the figure is a supplementary descriptive check
 - the figure duplicates a table too closely
-- the figure is informative but not central to identification or interpretation
-- the figure is useful for transparency but not essential to the main narrative
+- the figure is informative but not central to the main narrative
+- the figure is useful for transparency but not essential to the paper’s core descriptive or empirical story
+
+---
 
 ## References to Load On Demand
 
@@ -428,10 +508,12 @@ Suggested supporting references for this skill may include:
 - `references/figure-design-principles.md`
 - `references/color-font-export-guide.md`
 - `references/multi-panel-layout.md`
-- `references/event-study-figure-guide.md`
-- `references/coefficient-plot-guide.md`
+- `references/descriptive-trend-figure-guide.md`
+- `references/group-comparison-figure-guide.md`
 - `references/map-visualization-guide.md`
 - `references/figure-caption-guide.md`
+
+---
 
 ## Working Rule
 
@@ -439,8 +521,8 @@ A successful paper figure should let a careful reader answer quickly:
 
 1. what is being shown?
 2. why is this figure here?
-3. what part of the empirical argument does it support?
+3. what part of the empirical narrative does it support?
 4. how should the pattern be interpreted?
-5. is the visual claim appropriately narrower than or equal to the underlying design?
+5. is the visual interpretation appropriately narrower than or equal to the underlying evidence?
 
 If the figure is beautiful but does not improve analytical clarity, it is not yet good enough.
