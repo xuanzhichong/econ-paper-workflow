@@ -1,20 +1,30 @@
-# Results Section Writing Guide
+# Results Section Writing Guide for Empirical Economics and Agricultural Economics
 
-论文 Results 部分的写作规范和最佳实践。
+论文 `Results` 部分的写作规范与最佳实践。  
+本指南适用于 empirical economics 和 agricultural economics 论文，而不是 benchmark-style ML experiment reporting。
+
+---
 
 ## Results 部分的目的
 
-**核心目标**: 客观呈现实验结果，支持论文的核心贡献
+**核心目标**: 围绕识别设计呈现主结果，并说明这些结果在统计和经济意义上意味着什么。
 
-**不是**:
-- 重复 Methods 部分
-- 解释为什么这样做（属于 Discussion）
-- 过度解读结果
+**Results 部分不是**:
 
-**是**:
-- 展示实验数据
-- 引导读者观察关键现象
-- 提供足够的统计信息
+- 重复 `Data` 或 `Empirical Strategy` 的全部内容
+- 罗列与识别无关的补充回归
+- 把 mechanism、heterogeneity 或 robustness 写成新的 headline finding
+- 用强于设计所支持的语言做因果宣称
+
+**Results 部分是**:
+
+- 展示主估计结果
+- 说明结果的方向、数量级和经济意义
+- 提供与识别相关的支持性证据
+- 用 targeted robustness 回应具体识别威胁
+- 将补充材料有纪律地指向 appendix
+
+---
 
 ## 标准结构
 
@@ -23,242 +33,352 @@
 ```markdown
 ## Results
 
-### 主要发现概述
-[1-2 段总结核心结果]
+### Main findings overview
+[1 段简要概述主结果与主要识别支持]
 
-### 实验设置简述
-[简要说明，详细内容在 Methods 或 Appendix]
+### Baseline estimates
+[主回归表，解释系数、规格推进和经济意义]
 
-### 主要实验结果
-[与基线对比，支持核心贡献]
+### Identification support / dynamic evidence
+[event study, first stage, design validity evidence]
 
-### 消融实验
-[验证各组件的贡献]
+### Robustness checks
+[围绕识别威胁组织，而不是机械堆砌]
 
-### 额外分析
-[鲁棒性测试、跨数据集验证等]
+### Heterogeneity analysis
+[仅在有理论动机时展开]
 
-### 定性分析
-[案例研究、可视化示例]
+### Mechanism evidence
+[作为 supporting evidence，保持克制]
+
+### Appendix roadmap
+[说明哪些补充结果见附录]
 ```
+
+### 推荐逻辑顺序
+
+1. `baseline estimates`
+2. `identification support / dynamic evidence`
+3. `robustness`
+4. `heterogeneity`
+5. `mechanism`
+6. `appendix signposting`
+
+不要用 benchmark-style 顺序替代 identification-driven 顺序。
+
+---
 
 ## 写作原则
 
-### 1. 明确每个实验的目的
+### 1. 每个结果模块都要服务于识别逻辑
 
-**每个实验前说明验证的假设**:
+错误做法不是结果少，而是结果与识别威胁无关。
 
-❌ **错误**: "表 1 展示了结果"
+❌ **错误**: “表 3 展示了另外一组稳健性检验结果。”
 
-✅ **正确**: "为了验证我们的方法在不同数据集上的泛化能力，我们在三个基准数据集上进行了实验。表 1 展示了结果。"
+✅ **更好**: “为了检验基准结果是否受 selective rollout timing 驱动，表 3 使用 alternative treatment definitions 和 restricted samples 重新估计基准规格。”
 
-### 2. 引导读者观察
+---
 
-**主动指出关键现象**:
+### 2. 正文应围绕表图写，而不是围绕抽象结论写
 
-❌ **错误**: "图 2 展示了训练曲线"
+❌ **错误**: “结果表明 broadband rollout 显著改善就业。”
 
-✅ **正确**: "图 2 展示了训练曲线。可以观察到，我们的方法在前 10 个 epoch 内快速收敛，而基线方法需要 30 个 epoch 才能达到相似的性能。"
+✅ **更好**: “Table 2 reports the baseline DID estimates of broadband rollout on local employment outcomes. Across specifications, the coefficient on rollout remains positive and statistically significant.”
 
-### 3. 完整的统计信息
+---
 
-**必须包含**:
-- 均值
-- 标准差或标准误
-- 样本量（实验重复次数）
-- 统计检验结果（p-value）
+### 3. 解释系数时必须说明单位和经济意义
 
-**示例**: "我们的方法达到 85.3% ± 2.1% 的准确率（5 次运行的均值 ± 标准差），显著优于基线方法的 82.1% ± 1.8%（t-test, p < 0.01）。"
+Results 中不能只说显著，还要说：
 
-### 4. 图表和文本的配合
+- 是 level effect、log-point effect、percentage-point effect 还是 elasticity
+- 数量级是否具有经济意义
+- 加 controls / FE 后是否稳定
+- 是否因为 sample 改变而影响 comparability
 
-**图表**: 展示数据
-**文本**: 解释图表中的关键观察
+❌ **错误**: “系数显著为正，说明效果很好。”
 
-**示例**:
-```markdown
-图 3 展示了不同模型在测试集上的性能对比。我们的方法（蓝色）
-在所有指标上都优于基线方法（红色）。特别值得注意的是，在
-F1 分数上，我们的方法提升了 8.5 个百分点，这表明我们的方法
-在精确率和召回率之间取得了更好的平衡。
-```
+✅ **更好**: “The estimate implies a 1.2 percentage-point increase in employment, which is economically meaningful relative to the pre-treatment mean.”
 
-## 表格设计
+---
 
-### 性能对比表
+### 4. Identification support 要写得克制
 
-**标准格式**:
+特别是 DID / event study / IV / RDD 结果，不要把支持性检验写成“完全证明识别成立”。
 
-| Method | Accuracy ↑ | F1 Score ↑ | Latency ↓ |
-|--------|-----------|-----------|----------|
-| Baseline | 82.1 ± 1.8 | 79.3 ± 2.1 | 45ms |
-| Method A | 84.2 ± 1.5 | 81.7 ± 1.9 | 42ms |
-| **Ours** | **85.3 ± 2.1** | **83.5 ± 2.0** | **38ms** |
+❌ **错误**: “pre-trends 不显著证明了识别完全有效。”
 
-**要点**:
-- 加粗最好的结果
-- 使用箭头标注方向（↑ 越高越好，↓ 越低越好）
-- 包含误差范围
-- 右对齐数值列
+✅ **更好**: “The event-study estimates provide no strong evidence of differential pre-trends, which is consistent with the maintained identifying assumption, although it cannot fully rule out all endogeneity concerns.”
 
-### 消融实验表
+---
 
-**标准格式**:
+### 5. Robustness 要回应 threat，不要装饰性堆砌
 
-| Configuration | Accuracy | Δ |
-|--------------|----------|---|
-| Full Model | 85.3 | - |
-| w/o Component A | 83.1 | -2.2 |
-| w/o Component B | 84.5 | -0.8 |
-| w/o Component C | 82.7 | -2.6 |
+每个 robustness check 都应该回答一个具体问题：
 
-**要点**:
-- 第一行是完整模型
-- 每行移除一个组件
-- Δ 列显示性能变化
+- 是否是 treatment mismeasurement？
+- 是否是 selective timing？
+- 是否是 sample composition？
+- 是否是 omitted local shocks？
+- 是否是 spillover？
 
-## 图表设计
+❌ **错误**: “我们做了大量稳健性检验，结果都稳健。”
 
-### 训练曲线
+✅ **更好**: “These checks reduce the concern that the baseline estimate is driven by treatment coding, a small subset of municipalities, or one particular control set.”
 
-**必须包含**:
-- 误差带（阴影区域表示标准差）
-- 清晰的图例
-- 适当的坐标轴范围
-- 网格线（可选）
+---
 
-**代码示例**:
-```python
-import matplotlib.pyplot as plt
-import numpy as np
+### 6. Mechanism 和 Heterogeneity 要降一级写
 
-# 绘制训练曲线
-plt.figure(figsize=(8, 6))
-plt.plot(epochs, train_acc_mean, label='Ours', linewidth=2)
-plt.fill_between(epochs,
-                 train_acc_mean - train_acc_std,
-                 train_acc_mean + train_acc_std,
-                 alpha=0.3)
-plt.xlabel('Epoch')
-plt.ylabel('Accuracy (%)')
-plt.legend()
-plt.grid(alpha=0.3)
-plt.savefig('training_curve.pdf', bbox_inches='tight')
-```
+Mechanism 和 heterogeneity 通常是 supporting evidence，不应自动升级为主发现。
 
-### 性能对比图
+❌ **错误**: “这证明 broadband 通过 job matching channel 起作用。”
 
-**柱状图**:
-- 使用误差条
-- 色盲友好配色
-- 清晰的标签
+✅ **更好**: “The mechanism results are consistent with the interpretation that broadband improves job matching efficiency, but they should be interpreted as suggestive rather than definitive evidence.”
 
-**箱线图**:
-- 展示分布
-- 标注异常值
-- 适合展示多次运行的结果
+---
 
-## 常见句式
+## Baseline Results 的写法
 
-### 引入实验
+### 应包含的内容
 
-- "为了验证 [假设]，我们进行了 [实验]"
-- "我们首先评估了 [方法] 在 [数据集] 上的性能"
-- "表 X 展示了 [实验] 的结果"
+- 哪张表承载主结果
+- 因变量是什么
+- 关键系数方向和数量级
+- controls / FE / clustering 的推进方式
+- 结果是否跨规格稳定
+- 该 effect 的经济意义
 
-### 描述结果
+### 推荐句式
 
-- "我们的方法达到了 [数值]，优于 [基线] 的 [数值]"
-- "图 X 展示了 [现象]。可以观察到 [关键观察]"
-- "与 [基线] 相比，我们的方法在 [指标] 上提升了 [百分比]"
+- `Table X reports the baseline estimates of ...`
+- `Across specifications, the coefficient on ... remains ...`
+- `The magnitude is economically meaningful relative to ...`
+- `The estimate remains stable after adding ...`
+- `The change across columns is modest, suggesting that ...`
 
-### 统计显著性
+---
 
-- "这一差异在统计上显著（p < 0.01）"
-- "t-test 显示两组之间存在显著差异（p = 0.003）"
-- "经过 Bonferroni 校正后，差异仍然显著"
+## Identification Support / Dynamic Evidence 的写法
 
-### 消融实验
+### DID / Event Study
 
-- "为了验证 [组件] 的贡献，我们进行了消融实验"
-- "移除 [组件] 后，性能下降了 [数值]，这表明 [结论]"
-- "表 X 展示了各组件的贡献"
+Results 中应明确：
 
-## 避免的错误
+- omitted period
+- treatment timing convention
+- pre-treatment coefficients 如何解释
+- post-treatment dynamics 如何解释
 
-### 错误 1: 过度解读
+### IV
 
-❌ **错误**: "这证明了我们的方法是最好的"
+Results 中应明确：
 
-✅ **正确**: "在我们测试的三个数据集上，我们的方法优于所有基线方法"
+- first stage 在哪张表
+- reduced form / first stage / second stage 如何区分
+- first-stage strength 是否足够
+- second-stage interpretation 的范围
 
-### 错误 2: 隐藏负面结果
+### 推荐句式
 
-❌ **错误**: 只报告成功的实验
+- `Figure X presents the event-study estimates around ...`
+- `The pre-treatment coefficients provide no strong evidence of ...`
+- `Post-treatment coefficients become larger over time, suggesting that ...`
+- `Panel B reports the first-stage results, which show that ...`
 
-✅ **正确**: 诚实报告所有结果，包括失败的尝试（可以放在 Appendix）
+---
 
-### 错误 3: 缺少统计信息
+## Robustness 的写法
 
-❌ **错误**: "我们的方法达到 85.3%"
+### 应包含的内容
 
-✅ **正确**: "我们的方法达到 85.3% ± 2.1%（5 次运行的均值 ± 标准差）"
+- 该检查回应的 threat 是什么
+- 改动了哪一维 specification
+- 结果方向、数量级、精度是否保持
+- 主结论是否改变
 
-### 错误 4: 图表不清晰
+### 推荐句式
 
-❌ **错误**:
-- 位图格式（PNG）
-- 非色盲友好配色
-- 缺少误差条
-- 标签太小
+- `Table X and Appendix Table AX show that the baseline findings remain ...`
+- `These checks reduce the concern that ...`
+- `The estimate is somewhat smaller under this specification, but remains ...`
+- `The main conclusion is unchanged.`
 
-✅ **正确**:
-- 矢量图格式（PDF/EPS）
-- Okabe-Ito 配色
-- 包含误差条
-- 清晰的标签
+---
+
+## Heterogeneity 的写法
+
+### 应包含的内容
+
+- 分组是否有理论动机
+- subgroup 是如何定义的
+- 差异是否有经济解释
+- 结果是否只是 supporting evidence
+
+### 推荐句式
+
+- `The heterogeneity estimates suggest stronger effects in ...`
+- `This pattern is consistent with the idea that ...`
+- `These subgroup results should be interpreted as supportive rather than definitive evidence.`
+
+---
+
+## Mechanism 的写法
+
+### 应包含的内容
+
+- 机制变量是什么
+- 为什么这个机制与主问题相关
+- 机制结果如何支持主解释
+- 为什么不能把它写成额外独立识别
+
+### 推荐句式
+
+- `The mechanism results are consistent with ...`
+- `These findings suggest, but do not definitively establish, that ...`
+- `The mechanism evidence should therefore be interpreted cautiously ...`
+
+---
+
+## 表格写作规范
+
+### 主结果表
+
+默认遵循 economics-journal table discipline:
+
+- 一列对应一个 `DV` 或一个 specification family
+- `Controls`, `FE`, `Clustered SE`, `Weights` 用 `Yes/No` 或清晰方式披露
+- 每列都报告 `N`
+- 若不同列样本变动，必须说明
+- table note 要写清 sample、unit of observation、FE、clustering、权重、特殊样本规则
+
+### Event-study / IV 表
+
+必须额外说明：
+
+- omitted period / omitted category
+- timing convention
+- first stage / reduced form / second stage 的组织方式
+- instrument definition if applicable
+
+### 避免的表格问题
+
+- raw variable names 直接上表
+- 系数单位不清楚
+- clustering level 不写
+- appendix 表静默换样本
+- note 把关键设计逻辑藏起来替代正文说明
+
+---
+
+## 图形写作规范
+
+Results 中图形应服务于识别与解释，而不是装饰。
+
+### 推荐图形类型
+
+- `event-study plot`
+- `coefficient plot`
+- `heterogeneity coefficient plot`
+- `descriptive trend plot`
+- `mechanism-related descriptive figure`（仅在必要时）
+
+### 图形说明应包含
+
+- 图形展示什么估计对象
+- omitted period / baseline group
+- confidence interval or standard error display
+- 如何与主结果关联
+
+### 推荐句式
+
+- `Figure X plots the event-study coefficients with 95% confidence intervals.`
+- `The figure shows that ...`
+- `The graphical pattern is consistent with the regression results in Table X.`
+
+---
+
+## 常见错误
+
+### 错误 1: 结果强度超过设计强度
+
+❌ “这证明了政策带来因果影响。”  
+✅ “These estimates are consistent with a causal interpretation under the maintained identifying assumptions.”
+
+### 错误 2: 把 mechanism 写成结构性证明
+
+❌ “机制回归证明了该渠道。”  
+✅ “The mechanism evidence supports, but does not independently establish, this interpretation.”
+
+### 错误 3: 不说明样本变化
+
+❌ 正文比较列 (2) 和列 (5)，但 `N` 已明显不同。  
+✅ 明确说明 harmonized sample 或解释 sample change。
+
+### 错误 4: prose 与 table 不一致
+
+❌ 正文说 effect 显著，但表中已不显著。  
+✅ 每句 headline prose 都对照最终 table export 检查。
+
+### 错误 5: robustness 没有目的
+
+❌ 罗列 8 个 check，但不知道各自回应哪个 threat。  
+✅ 每个 check 对应一个明确识别担忧。
+
+---
 
 ## 检查清单
 
 提交前检查：
 
-- [ ] 每个实验都说明了目的
-- [ ] 所有数值都有误差范围
-- [ ] 统计检验方法已说明
-- [ ] 图表清晰可读（包括黑白打印）
-- [ ] 引导读者观察关键现象
-- [ ] 没有过度解读结果
-- [ ] 诚实报告局限性
-- [ ] 实验设置简述（详细内容在 Methods）
+- [ ] 主结果围绕识别设计展开
+- [ ] 每个 headline sentence 都能对应到最终表图
+- [ ] 系数单位和经济意义解释清楚
+- [ ] controls / FE / clustering / sample 在表注中披露完整
+- [ ] event-study / IV / RDD 结果写得足够克制
+- [ ] robustness checks 与具体 threat 一一对应
+- [ ] heterogeneity 有理论动机
+- [ ] mechanism 结果没有被写得过强
+- [ ] appendix 承担支持性材料，而非隐藏关键设计逻辑
+- [ ] text、table、appendix 三者表述一致
+
+---
 
 ## 示例 Results 部分
 
-参见 `examples/example-results-section.md` 获取完整的 Results 部分示例。
+参见：
+
+- `examples/example-results-section.md`
+
+---
 
 ## 与其他部分的关系
 
-### Results vs Methods
+### Results vs Empirical Strategy
 
-**Methods**: 如何做实验
-**Results**: 实验结果是什么
+**Empirical Strategy**: 解释设计、方程、假设、威胁  
+**Results**: 呈现估计结果，并说明这些结果如何与设计和威胁对应
 
-**避免**: 在 Results 中重复 Methods 的内容
+避免在 Results 中重复整段 strategy，但也不要让 reader 看不出结果如何服务于识别。
 
-### Results vs Discussion
+### Results vs Discussion / Conclusion
 
-**Results**: 客观呈现数据
-**Discussion**: 解释结果的含义
+**Results**: 报告主估计、识别支持、稳健性、支持性机制证据  
+**Discussion / Conclusion**: 提炼 broader meaning、policy implications、limitations
 
-**避免**: 在 Results 中过度解释
+Results 可以解释经济量级和与识别相关的含义，但不要替代 discussion 去做过度延伸。
+
+---
 
 ## 总结
 
-Results 部分的核心原则：
+Results 部分的核心原则是：
 
-1. **客观呈现** - 不过度解读
-2. **完整信息** - 统计量、误差、样本量
-3. **引导观察** - 指出关键现象
-4. **清晰可视化** - 论文级图表
-5. **诚实报告** - 包括局限性
+1. **围绕识别逻辑组织，而不是围绕结果堆砌组织**
+2. **先主结果，再识别支持，再 targeted robustness**
+3. **异质性与机制是 supporting evidence，不是自动升级的 headline**
+4. **所有结果解释都要说明单位、数量级和经济意义**
+5. **正文、表格、附录和识别表述必须一致**
 
-遵循这些原则可以写出清晰、严谨、有说服力的 Results 部分。
+遵循这些原则，Results 部分才真正符合 empirical economics 和 agricultural economics 的写作范式。
