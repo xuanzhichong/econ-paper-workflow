@@ -1,330 +1,325 @@
-# 实验结果分析报告
+# 实证结果分析报告示例
 
-**项目**: 基于 Transformer 的文本分类模型
-**实验日期**: 2024-01-15
-**分析日期**: 2024-01-20
+**项目**: Broadband Rollout and Local Labor Market Adjustment  
+**研究类型**: Empirical Economics / Policy Evaluation  
+**分析目的**: 为论文 `Main Results`、`Robustness`、`Mechanism` 和附录部分提供结果解读框架  
 **分析人员**: Research Team
 
 ---
 
 ## 执行摘要
 
-本报告分析了三个文本分类模型（Baseline LSTM, BERT-base, Our Method）在四个数据集上的性能。主要发现：
+本报告基于 municipality-year panel 数据，分析 broadband rollout 对小型 municipalities 劳动力市场调整的影响。基准结果显示，broadband rollout 与本地就业率上升和失业率下降显著相关，且 effect 在 rollout 后第 2–3 年更为明显。事件研究图未显示明显的 pre-trend，支持基准 DID 识别的可接受性。稳健性分析表明，结果对 alternative treatment definitions、sample restrictions 和 controls 设定总体稳健。异质性结果显示，effects 在 baseline labor market thinner、digitally lagging 的 municipalities 中更强。机制分析表明，broadband 可能主要通过 job matching efficiency 和 firm entry 两个渠道发挥作用，但这些机制结果应视为支持性证据，而非额外独立识别。
 
-1. **Our Method 在所有数据集上均优于基线方法**，平均准确率提升 3.2 个百分点
-2. **统计显著性已验证**，所有对比均通过 t-test（p < 0.01）
-3. **训练效率提升 40%**，相比 BERT-base 减少训练时间
-4. **鲁棒性良好**，标准差控制在 ±1.5% 以内
+**当前结论**:  
+结果初步支持论文的核心论点，但正文写作时应将重点放在：
 
-**建议**: 结果支持论文的核心贡献，建议在 Results 部分重点展示性能对比和消融实验。
-
----
-
-## 1. 实验设置
-
-### 1.1 数据集
-
-| 数据集 | 样本数 | 类别数 | 领域 |
-|--------|--------|--------|------|
-| IMDB | 50,000 | 2 | 电影评论 |
-| SST-2 | 67,349 | 2 | 情感分析 |
-| AG News | 120,000 | 4 | 新闻分类 |
-| DBpedia | 560,000 | 14 | 知识图谱 |
-
-### 1.2 模型配置
-
-**Baseline LSTM**:
-- Hidden size: 256
-- Layers: 2
-- Dropout: 0.3
-
-**BERT-base**:
-- Pretrained: bert-base-uncased
-- Fine-tuning: Full model
-- Learning rate: 2e-5
-
-**Our Method**:
-- Architecture: Transformer + Attention
-- Hidden size: 512
-- Layers: 6
-- Learning rate: 1e-4
-
-### 1.3 训练设置
-
-- **实验重复次数**: 5 次（随机种子: 42, 123, 456, 789, 1024）
-- **Batch size**: 32
-- **Epochs**: 20（早停，patience=3）
-- **优化器**: AdamW
-- **硬件**: 4 × NVIDIA V100 GPU
-- **训练时间**: 约 12 小时/模型
+1. 识别逻辑与 event-study 证据  
+2. 基准结果的经济含义  
+3. 稳健性如何回应具体识别威胁  
+4. 机制与异质性证据的克制表述
 
 ---
 
-## 2. 统计摘要
+## 1. 识别与样本概览
 
-### 2.1 整体性能对比
+### 1.1 研究问题
 
-| 模型 | IMDB | SST-2 | AG News | DBpedia | 平均 |
-|------|------|-------|---------|---------|------|
-| Baseline LSTM | 86.2 ± 1.8 | 84.5 ± 2.1 | 88.3 ± 1.5 | 92.1 ± 1.2 | 87.8 |
-| BERT-base | 91.3 ± 1.2 | 89.7 ± 1.5 | 92.5 ± 1.1 | 95.3 ± 0.9 | 92.2 |
-| **Our Method** | **93.5 ± 1.3** | **91.2 ± 1.4** | **94.1 ± 1.2** | **96.8 ± 0.8** | **93.9** |
+本研究关注：broadband rollout 是否改善小型 municipalities 的 labor market adjustment，以及这一影响通过何种 margin 发生。
 
-**注**: 数值为准确率（%），格式为"均值 ± 标准差"，基于 5 次运行。
+### 1.2 基准识别设计
 
-### 2.2 统计显著性检验
+基准设计采用 staggered rollout DID / event study 框架，利用不同 municipalities broadband rollout timing 的差异识别 treatment effect。
 
-**预先检验**:
-- **正态性检验** (Shapiro-Wilk): 所有组 p > 0.05，满足正态分布假设
-- **方差齐性检验** (Levene): F = 1.23, p = 0.31，满足方差齐性假设
+### 1.3 估计样本
 
-**主要对比**:
+- **单位**: municipality-year
+- **时间范围**: 视数据可用性而定的多年面板
+- **处理组**: 已发生 broadband rollout 的 municipalities
+- **对照组**: 尚未 rollout 的 municipalities
+- **核心 outcomes**:
+  - employment rate
+  - unemployment rate
+  - job-finding or labor reallocation indicators
+  - firm entry (如可得)
 
-| 对比 | t-statistic | p-value | Cohen's d | 结论 |
-|------|-------------|---------|-----------|------|
-| Our Method vs Baseline | t(8) = 5.67 | p < 0.001 | d = 2.13 | 显著优于 |
-| Our Method vs BERT-base | t(8) = 3.21 | p = 0.012 | d = 1.05 | 显著优于 |
-| BERT-base vs Baseline | t(8) = 4.89 | p = 0.001 | d = 1.78 | 显著优于 |
+### 1.4 主要识别威胁
 
-**多重比较校正**: 使用 Bonferroni 校正（α' = 0.05/3 = 0.017），所有对比仍然显著。
-
-### 2.3 效应量分析
-
-- **Our Method vs Baseline**: Cohen's d = 2.13（**大效应量**）
-- **Our Method vs BERT-base**: Cohen's d = 1.05（**大效应量**）
-
-**解释**: 效应量表明性能提升不仅统计显著，而且实际差异很大。
+- rollout timing 与 municipalities 既有增长趋势相关
+- rollout 受地方财政能力或政治优先级影响
+- geographic feasibility 既影响 rollout，也影响 labor market outcomes
+- 邻近 treated municipalities 可能带来 spillover
 
 ---
 
-## 3. 关键发现
+## 2. 主结果摘要
 
-### 3.1 性能提升
+### 2.1 基准回归结果
 
-**发现 1**: Our Method 在所有数据集上均优于基线方法
+**主结果 1**: broadband rollout 与就业率改善显著相关。  
+在包含 municipality fixed effects 和 year fixed effects 的基准规格下，treatment coefficient 为正，表明 rollout 后 treated municipalities 的 employment rate 相对对照组上升。
 
-- IMDB: +7.3% vs Baseline, +2.2% vs BERT-base
-- SST-2: +6.7% vs Baseline, +1.5% vs BERT-base
-- AG News: +5.8% vs Baseline, +1.6% vs BERT-base
-- DBpedia: +4.7% vs Baseline, +1.5% vs BERT-base
+**主结果 2**: broadband rollout 与失业率下降相关。  
+对应的 unemployment outcome 显示负向系数，方向与理论预期一致。
 
-**发现 2**: 小数据集上提升更明显
+### 2.2 结果解读原则
 
-- IMDB (50K 样本): +7.3% vs Baseline
-- DBpedia (560K 样本): +4.7% vs Baseline
+写作时应明确：
 
-**解释**: Our Method 在数据量较少时表现更好，可能因为模型设计更适合小样本学习。
+- 哪一张表承载主结果
+- 系数的单位和经济含义
+- 该 effect 是 level change、percentage-point change 还是 log-point change
+- controls 和 FE 加入后估计是否稳定
+- 是否存在 adjusted sample 变化
 
-### 3.2 训练效率
+### 2.3 建议的正文表达
 
-| 模型 | 训练时间 | 收敛 Epoch | GPU 小时 |
-|------|----------|-----------|----------|
-| Baseline LSTM | 2.5h | 15 | 10 |
-| BERT-base | 8.5h | 12 | 34 |
-| Our Method | 5.2h | 10 | 20.8 |
-
-**发现 3**: Our Method 训练效率优于 BERT-base
-
-- 训练时间减少 38.8%
-- GPU 小时减少 38.8%
-- 收敛速度更快（10 vs 12 epochs）
-
-### 3.3 稳定性分析
-
-**标准差对比**:
-
-| 模型 | 平均标准差 | 最大标准差 | 最小标准差 |
-|------|-----------|-----------|-----------|
-| Baseline LSTM | 1.65% | 2.1% | 1.2% |
-| BERT-base | 1.18% | 1.5% | 0.9% |
-| Our Method | 1.18% | 1.4% | 0.8% |
-
-**发现 4**: Our Method 稳定性与 BERT-base 相当，优于 Baseline
-
-- 5 次运行的标准差控制在 ±1.5% 以内
-- 变异系数 (CV) < 2%，表明结果可重现性好
+> Table 2 reports the baseline DID estimates of broadband rollout on local labor market outcomes. Across specifications, broadband rollout is associated with an increase in the local employment rate and a decline in unemployment. The estimated coefficients remain stable after adding municipality and year fixed effects, time-varying municipal controls, and alternative clustering choices, suggesting that the baseline relationship is not driven by a narrow specification choice alone.
 
 ---
 
-## 4. 消融实验
+## 3. 识别有效性与动态结果
 
-### 4.1 组件贡献分析
+### 3.1 Event-study 结果
 
-| 配置 | IMDB | SST-2 | AG News | DBpedia | 平均 | Δ |
-|------|------|-------|---------|---------|------|---|
-| Full Model | 93.5 | 91.2 | 94.1 | 96.8 | 93.9 | - |
-| w/o Attention | 91.2 | 89.5 | 92.3 | 95.1 | 92.0 | -1.9 |
-| w/o Positional Encoding | 92.1 | 90.1 | 93.2 | 96.0 | 92.9 | -1.0 |
-| w/o Layer Norm | 90.8 | 88.9 | 91.8 | 94.8 | 91.6 | -2.3 |
+**主结果 3**: pre-treatment coefficients 整体接近零，未见系统性 pre-trend。  
+这为 parallel-trends-type assumption 提供了支持，但应避免过度表述为“完全证明外生性”。
 
-**发现 5**: 所有组件都对性能有贡献
+### 3.2 动态效应
 
-- **Layer Norm 最重要**: 移除后性能下降 2.3%
-- **Attention 次之**: 移除后性能下降 1.9%
-- **Positional Encoding**: 移除后性能下降 1.0%
+- rollout 当年 effect 可能有限
+- rollout 后 1–3 年效果逐步增强
+- medium-run effects 强于 immediate effects，说明 broadband 影响可能通过 gradual adjustment 实现
 
-### 4.2 超参数敏感性
+### 3.3 建议的正文表达
 
-**Learning Rate**:
-
-| LR | IMDB | SST-2 | AG News | DBpedia | 平均 |
-|----|------|-------|---------|---------|------|
-| 1e-5 | 91.2 | 89.1 | 92.0 | 95.2 | 91.9 |
-| 5e-5 | 92.8 | 90.5 | 93.5 | 96.3 | 93.3 |
-| **1e-4** | **93.5** | **91.2** | **94.1** | **96.8** | **93.9** |
-| 5e-4 | 92.1 | 89.8 | 92.8 | 95.5 | 92.6 |
-| 1e-3 | 89.5 | 87.2 | 90.1 | 93.8 | 90.2 |
-
-**发现 6**: 最优 learning rate 为 1e-4
-
-- 过小（1e-5）: 收敛慢，性能次优
-- 过大（1e-3）: 训练不稳定，性能下降
+> Figure 2 presents the event-study estimates around broadband rollout. The pre-treatment coefficients are generally small and statistically imprecise, providing no strong evidence of differential pre-trends before rollout. Post-treatment coefficients become more positive over time, suggesting that the labor market effects of broadband expansion emerge gradually rather than immediately.
 
 ---
 
-## 5. 建议的可视化
+## 4. 稳健性分析
 
-### 5.1 主要对比图
+### 4.1 稳健性检查应回应的识别威胁
 
-**图 1: 性能对比柱状图**
-- X 轴: 数据集（IMDB, SST-2, AG News, DBpedia）
-- Y 轴: 准确率（%）
-- 三组柱子: Baseline, BERT-base, Our Method
-- 包含误差条（标准差）
-- 加粗 Our Method 的柱子
+稳健性部分不应机械堆砌，而应围绕下列风险展开：
 
-**图 2: 训练曲线**
-- X 轴: Epoch
-- Y 轴: 验证准确率（%）
-- 三条曲线: Baseline, BERT-base, Our Method
-- 使用误差带（阴影区域）
-- 色盲友好配色（Okabe-Ito）
+- selective rollout timing
+- treatment mismeasurement
+- sample composition changes
+- omitted time-varying local shocks
+- spillover or boundary contamination
 
-### 5.2 消融实验图
+### 4.2 建议的稳健性模块
 
-**图 3: 消融实验柱状图**
-- X 轴: 配置（Full, w/o Attention, w/o PE, w/o LN）
-- Y 轴: 平均准确率（%）
-- 单组柱子，加粗 Full Model
-- 标注性能下降百分比（Δ）
+可包括：
 
-### 5.3 超参数敏感性图
+- alternative treatment definitions
+- excluding early adopters or policy-prioritized municipalities
+- adding pre-period municipal trends where defensible
+- placebo timing tests
+- alternative clustering levels
+- sample restrictions excluding potentially contaminated neighboring municipalities
 
-**图 4: Learning Rate 敏感性曲线**
-- X 轴: Learning Rate（对数刻度）
-- Y 轴: 平均准确率（%）
-- 单条曲线，标记最优点
-- 包含误差带
+### 4.3 结果解读
 
----
+若主结果在这些规格下方向一致、数量级相近，应表述为：
 
-## 6. 统计报告模板
+- supports the robustness of the main findings
+- reduces concern that the main result is driven by a narrow specification choice
 
-### 6.1 Results 部分文本
+而不是表述为：
 
-**建议文本**:
+- definitively proves causality
 
-> 表 1 展示了三个模型在四个数据集上的性能对比。我们的方法在所有数据集上均优于基线方法，平均准确率达到 93.9%，相比 Baseline LSTM 提升 6.1 个百分点，相比 BERT-base 提升 1.7 个百分点。
->
-> 为了验证性能提升的统计显著性，我们使用配对样本 t-test 进行检验。在进行参数检验前，我们使用 Shapiro-Wilk 检验验证了数据的正态性（所有组 p > 0.05），使用 Levene 检验验证了方差齐性（F = 1.23, p = 0.31）。结果表明，我们的方法显著优于 Baseline LSTM（t(8) = 5.67, p < 0.001, Cohen's d = 2.13）和 BERT-base（t(8) = 3.21, p = 0.012, Cohen's d = 1.05）。经过 Bonferroni 校正后（α' = 0.017），差异仍然显著。
->
-> 图 2 展示了三个模型的训练曲线。可以观察到，我们的方法在前 10 个 epoch 内快速收敛，而 BERT-base 需要 12 个 epoch 才能达到相似的性能。这表明我们的方法不仅性能更好，而且训练效率更高。
+### 4.4 建议的正文表达
 
-### 6.2 统计信息报告
-
-**必须包含的信息**:
-- ✅ 均值 ± 标准差（5 次运行）
-- ✅ 统计检验方法（配对样本 t-test）
-- ✅ 预先检验结果（正态性、方差齐性）
-- ✅ 检验统计量（t-statistic, df）
-- ✅ p-value
-- ✅ 效应量（Cohen's d）
-- ✅ 多重比较校正（Bonferroni）
-- ✅ 实验重复次数和随机种子
+> The robustness checks in Table 3 and Appendix Tables A2–A5 show that the main estimates remain directionally stable across alternative treatment definitions, sample restrictions, and control sets. These exercises reduce the concern that the baseline findings are driven by a specific coding choice or a small set of municipalities, although they cannot eliminate all concerns about selective rollout timing.
 
 ---
 
-## 7. 质量检查
+## 5. 异质性分析
 
-### 7.1 统计严谨性
+### 5.1 理论动机
 
-- [x] 报告了所有实验运行的结果（5 次）
-- [x] 明确标注了标准差
-- [x] 进行了预先检验（正态性、方差齐性）
-- [x] 使用了适当的统计检验（配对样本 t-test）
-- [x] 进行了多重比较校正（Bonferroni）
-- [x] 报告了 p-value 和效应量
-- [x] 样本量足够（5 次运行）
+异质性分析应服务于主问题，而不是无差别分组。  
+本项目较有解释力的分组包括：
 
-### 7.2 可重现性
+- baseline labor market thickness
+- baseline digital infrastructure level
+- municipality size
+- sector composition
+- fiscal capacity
 
-- [x] 报告了随机种子（42, 123, 456, 789, 1024）
-- [x] 说明了超参数搜索范围
-- [x] 提供了计算资源信息（4 × V100, 12h）
-- [x] 说明了训练设置（batch size, epochs, optimizer）
-- [x] 数据集信息完整
+### 5.2 预期模式
 
-### 7.3 可视化质量
+若 broadband 真正改善 local adjustment，则 effect 可能在：
 
-- [x] 建议使用矢量图格式（PDF/EPS）
-- [x] 建议使用色盲友好配色（Okabe-Ito）
-- [x] 包含误差条/误差带
-- [x] 图表清晰易读
+- baseline digital access 更弱地区
+- labor market thinner 地区
+- 更依赖信息摩擦缓解的地区
 
----
+中更明显。
 
-## 8. 下一步建议
+### 5.3 写作提醒
 
-### 8.1 论文写作
+异质性结果应写成：
 
-1. **Results 部分**:
-   - 使用表 1 展示性能对比
-   - 使用图 2 展示训练曲线
-   - 使用图 3 展示消融实验
-   - 按照 6.1 节的文本模板撰写
+- consistent with the idea that...
+- suggests stronger effects in...
 
-2. **Appendix**:
-   - 详细的超参数搜索结果
-   - 每个数据集的详细结果
-   - 额外的消融实验
+而不要写成：
 
-3. **Limitations**:
-   - 只在英文数据集上测试
-   - 计算资源需求较高
-   - 小数据集上提升更明显
-
-### 8.2 额外实验
-
-**建议补充**:
-1. 跨语言验证（中文、法文数据集）
-2. 更多基线方法对比（RoBERTa, ELECTRA）
-3. 错误分析（哪些样本分类错误）
-4. 可解释性分析（注意力权重可视化）
-
-### 8.3 代码和数据
-
-**需要准备**:
-- 训练代码（GitHub 仓库）
-- 预训练模型（Hugging Face）
-- 实验结果（CSV 文件）
-- 可视化脚本
+- proves that the mechanism is...
 
 ---
 
-## 9. 总结
+## 6. 机制分析
 
-本次实验结果分析表明：
+### 6.1 可行机制
 
-1. **Our Method 性能优异**: 在所有数据集上均优于基线方法，平均提升 6.1%（vs Baseline）和 1.7%（vs BERT-base）
-2. **统计显著性已验证**: 所有对比均通过 t-test（p < 0.01），效应量大（Cohen's d > 1.0）
-3. **训练效率高**: 相比 BERT-base 减少 38.8% 训练时间
-4. **结果可重现**: 5 次运行的标准差控制在 ±1.5% 以内
-5. **组件贡献明确**: 消融实验验证了各组件的必要性
+较自然的机制包括：
 
-**结论**: 实验结果充分支持论文的核心贡献，建议按照本报告的建议撰写 Results 部分。
+- improved job search efficiency
+- remote work opportunities
+- local firm entry
+- worker reallocation across sectors or places
+
+### 6.2 写作纪律
+
+机制结果属于支持性证据。  
+除非有额外识别，否则不应将其写成独立因果结论。
+
+### 6.3 建议的正文表达
+
+> The mechanism evidence is consistent with the interpretation that broadband rollout improves labor market adjustment partly by facilitating job matching and supporting local firm formation. However, these results should be interpreted as suggestive rather than definitive mechanism proof, because the mechanism outcomes are not separately identified from the main policy shock.
 
 ---
 
-**报告生成时间**: 2024-01-20 15:30
-**分析工具**: results-analysis skill
-**联系人**: research-team@example.com
+## 7. 表格与图形组织建议
+
+### 7.1 主文表格
+
+**Table 1. Summary Statistics**  
+- sample definition
+- treated vs control descriptive comparison
+- key outcomes and controls
+
+**Table 2. Baseline DID Results**  
+- one outcome per column or one closely related outcome family per column
+- `Controls`, `FE`, `Clustered SE` 用 `Yes/No` 披露
+
+**Table 3. Robustness Checks**  
+- alternative treatment definitions
+- sample restrictions
+- clustering / controls sensitivity
+
+**Table 4. Heterogeneity Analysis**  
+- theory-motivated subgroup estimates
+
+**Table 5. Mechanism Results**  
+- supporting outcomes only
+
+### 7.2 主文图形
+
+**Figure 1. Rollout Timing Distribution or Treatment Map**  
+- 展示 treatment timing variation
+
+**Figure 2. Event-study Plot**  
+- 显示 pre-trend 和 post-treatment dynamics
+
+**Figure 3. Heterogeneity Coefficient Plot**  
+- 展示 subgroup effects
+
+### 7.3 附录建议
+
+- alternative samples
+- placebo timing tests
+- extra event-study specifications
+- variable construction details
+- additional institutional background
+- replication or data-access notes
+
+---
+
+## 8. Results 部分写作模板
+
+### 8.1 主结果段落模板
+
+> Table 2 reports the baseline estimates of broadband rollout on local labor market outcomes. Across specifications, the coefficient on rollout is positive for employment and negative for unemployment, indicating that treated municipalities experience more favorable labor market adjustment after rollout. The magnitude remains stable after adding municipality and year fixed effects as well as time-varying controls, suggesting that the baseline pattern is not driven by a narrow set of specification choices.
+
+### 8.2 动态结果段落模板
+
+> Figure 2 presents the event-study estimates. The pre-treatment coefficients are generally small and imprecisely estimated, providing no strong evidence of differential trends before rollout. By contrast, the post-treatment coefficients become progressively larger, consistent with the view that the effects of broadband expansion materialize gradually rather than immediately.
+
+### 8.3 稳健性段落模板
+
+> The robustness checks in Table 3 and the appendix show that the main estimates remain broadly stable across alternative treatment definitions, sample restrictions, and control strategies. These exercises reduce the concern that the baseline findings are driven by treatment coding, a small subset of municipalities, or a particular regression specification.
+
+### 8.4 机制段落模板
+
+> The mechanism results are consistent with the interpretation that broadband rollout affects labor market adjustment through improved matching efficiency and local firm dynamics. At the same time, these estimates should be interpreted cautiously, because the mechanism outcomes are not separately identified from the main treatment effect.
+
+---
+
+## 9. 当前结果写作中的主要风险
+
+### 9.1 需要避免的问题
+
+- 把 event-study 无显著 pre-trend 写成“完全证明外生性”
+- 把稳健性检验写成新的 headline finding
+- 把机制结果写成确定性 causal channel
+- 不说明 adjusted sample 是否变化
+- 不说明 clustering level 与 treatment variation 的关系
+- 把 appendix 里才有的关键识别细节从正文省掉
+
+### 9.2 如果结果暂时不够强，应如何写
+
+如果估计不够稳健，应使用更克制表述，例如：
+
+- is associated with
+- is consistent with
+- suggests
+- appears to
+
+而不是直接写：
+
+- increases
+- reduces
+- leads to
+
+---
+
+## 10. 下一步建议
+
+### 10.1 对论文正文
+
+1. 先固定主结果表和 event-study 图  
+2. 按识别威胁组织 robustness，而不是罗列所有补充回归  
+3. 将 mechanism 和 heterogeneity 明确降级为 supporting evidence  
+4. 在主文保留最关键的 identification logic，不要全部挪到 appendix
+
+### 10.2 对附录
+
+1. 补充 variable construction  
+2. 补充 sample construction and exclusions  
+3. 放入额外 placebo 和 alternative-specification tables  
+4. 增加 replication / data-access note
+
+### 10.3 对复现包
+
+需要准备：
+
+- do-file execution order
+- table / figure production scripts
+- intermediate data description
+- restricted-data disclosure if relevant
+- README with dependencies and expected outputs
+
+---
+
+## 11. 总结
+
+当前结果分析表明，broadband rollout 对小型 municipalities 的 labor market adjustment 具有正向影响，且动态结果与稳健性分析在总体上支持这一结论。现阶段最重要的不是继续堆砌结果，而是把现有估计按照 empirical economics 的写作纪律组织清楚：主结果围绕识别逻辑展开，稳健性围绕识别威胁展开，机制与异质性保持克制表述，附录承担支持性材料而不替代正文中的核心设计说明。
+
+**建议结论**:  
+该项目的 Results 部分应围绕 `baseline DID + event study + targeted robustness + disciplined mechanism/heterogeneity writing` 来组织，而不是采用 benchmark-style experiment reporting.
