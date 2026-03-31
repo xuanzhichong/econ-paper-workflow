@@ -3,32 +3,49 @@
 ## Metadata
 
 - artifact:
+- artifact type: paper / response
 - round:
 - date:
 - verifier:
+- files reviewed:
 
 ## Verdict
 
-- status: `APPROVED | CONTINUE | STOP_MAX_ROUNDS`
+- status: `APPROVED | CONTINUE | STOPPED-NOT-APPROVED`
 - readiness: `below-threshold | commit-ready | submission-ready | excellence`
+
+## Summary Judgment
+
+- Brief summary of current status and whether another round is needed.
 
 ## Hard Gates
 
 | gate | status | evidence |
 | --- | --- | --- |
-| gate 1 | pass/fail | |
-| gate 2 | pass/fail | |
+| core logic / consistency | pass/fail | |
+| claim-to-evidence alignment | pass/fail | |
+| citation / support integrity | pass/fail | |
+| traceability / reproducibility | pass/fail | |
+| unresolved blocker status | pass/fail | |
 
 ## Scores
 
 | category | score |
 | --- | --- |
-| category 1 | |
-| category 2 | |
+| substantive adequacy | |
+| internal consistency | |
+| evidence / citation integrity | |
+| traceability / reproducibility | |
 | overall | |
 
 ## Top Remaining Blockers
 
+Only if not approved:
+
 1. 
 2. 
 3. 
+
+## Next-Round Target
+
+- Ready for submission / or specify the main next step.
