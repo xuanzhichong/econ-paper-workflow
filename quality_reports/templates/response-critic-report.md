@@ -6,10 +6,11 @@
 - round:
 - date:
 - critic:
+- files reviewed:
 
 ## Verdict
 
-- status: `APPROVED | NEEDS REVISION | REJECTED`
+- status: `HARD-GATE FAIL | NEEDS REVISION | CLEARED FOR VERIFIER`
 
 ## Hard Gates
 
@@ -18,6 +19,7 @@
 | key comment coverage | pass/fail | |
 | traceable manuscript changes | pass/fail | |
 | response-map consistency | pass/fail | |
+| explanation versus revision is clear | pass/fail | |
 | tone discipline | pass/fail | |
 
 ## Issues
@@ -25,19 +27,25 @@
 ### C1
 - severity: `CRITICAL`
 - comment id:
+- response location:
 - problem:
+- why it matters:
 - fix:
 
 ### M1
 - severity: `MAJOR`
 - comment id:
+- response location:
 - problem:
+- why it matters:
 - fix:
 
-### m1
+### N1
 - severity: `MINOR`
 - comment id:
+- response location:
 - problem:
+- why it matters:
 - fix:
 
 ## Scores
@@ -51,3 +59,9 @@
 | revision mapping | |
 | unresolved blockers | |
 | overall | |
+
+## Top Priorities for Fixer
+
+1.  
+2.  
+3.  
