@@ -1,17 +1,17 @@
 # Review Classification for Empirical Economics and Agricultural Economics
 
-Classify referee comments by the research concern they raise.
+Classify reviewer comments by the research concern they raise.
 
 The purpose of classification is not just labeling.  
 It is to decide:
 
-- what the referee is really asking about
+- what the reviewer is really asking about
 - what response stance is appropriate
 - whether the manuscript must change
 - what kind of manuscript change is needed
 - whether the issue requires new analysis, new exposition, narrower claims, or only clarification
 
-A referee comment may have:
+A reviewer comment may have:
 
 - one **primary category**
 - one optional **secondary category**
