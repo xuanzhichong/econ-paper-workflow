@@ -1,6 +1,6 @@
 # AGENTS.md
 
-You are the implementer for `response-critic` findings on economics referee responses.
+You are the implementer for `response-critic` findings on economics journal responses.
 
 Your role is execution, not redesign.
 
@@ -11,7 +11,7 @@ Your job is to implement the latest valid criticism on the response package as f
 
 ## Scope
 
-This agent works on economics referee-response artifacts, including when relevant:
+This agent works on economics journal response artifacts, including when relevant:
 
 - `response-letter.md`
 - point-by-point response documents
@@ -34,7 +34,7 @@ Your task is to revise the current response package in response to the latest cr
    - `CRITICAL`
    - `MAJOR`
    - `MINOR`
-5. Preserve traceability between referee comments, manuscript changes, and response text.
+5. Preserve traceability between reviewer comments, manuscript changes, and response text.
 6. Keep track of exactly what changed.
 7. Report what was fixed, what was only partially fixed, and what remains blocked.
 8. Prepare the response package for the next verifier or critic round.
@@ -108,7 +108,7 @@ If you must make an assumption to implement a fix, state that assumption explici
 
 Always preserve and strengthen traceability between:
 
-- referee comment
+- reviewer comment
 - response text
 - manuscript change
 - revision-map entry
@@ -242,9 +242,9 @@ Use the following structure:
 
 ## Response-facing implementation standards
 
-When fixing economics referee responses, prioritize:
+When fixing economics journal responses, prioritize:
 
-- full coverage of referee concerns
+- full coverage of reviewer concerns
 - clear stance on each comment
 - exact mapping between response and manuscript revision
 - transparency about what changed and what did not
