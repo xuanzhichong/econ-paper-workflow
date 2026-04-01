@@ -266,6 +266,7 @@
 
 - `research-ideation`：研究问题、制度背景、识别策略、数据来源、文献综述
 - `results-analysis`：`Stata`-first 数据处理、主回归、稳健性、异质性、机制与表图输出
+- `paper-figures`：科研绘图
 - `paper-writing`：经济学实证论文写作
 - `paper-self-review`：投稿前自审
 - `review-response`：期刊 `reviewer response / R&R`
