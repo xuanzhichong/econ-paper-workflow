@@ -153,6 +153,7 @@ If those five points are not easy to identify, the response is not yet strong en
 - `references/response-strategies.md`
 - `references/tone-guidelines.md`
 - `references/successful-cases.md`
+- `references/response-letter-templates.md`
 
 Use older legacy response templates only after adapting them to journal response style.
 
