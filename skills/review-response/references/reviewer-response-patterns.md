@@ -1,11 +1,11 @@
-# Referee Response Patterns for Empirical Economics and Agricultural Economics
+# Reviewer Response Patterns for Empirical Economics and Agricultural Economics
 
 Use these patterns for journal revisions and R&R letters.
 
 These are response-letter patterns for empirical economics and agricultural economics papers.  
-They are not conference rebuttal templates.
+They are not conference response templates.
 
-The purpose of a good referee response is not only to sound professional, but to make each reply:
+The purpose of a good reviewer response is not only to sound professional, but to make each reply:
 
 - clear
 - traceable
@@ -18,7 +18,7 @@ The purpose of a good referee response is not only to sound professional, but to
 
 A strong per-comment response usually does the following:
 
-1. thank the referee
+1. thank the reviewer
 2. restate the concern briefly
 3. state the response stance clearly
 4. answer the substance directly
@@ -28,7 +28,7 @@ A strong per-comment response usually does the following:
 
 A good response should make it easy to identify:
 
-- what the referee is worried about
+- what the reviewer is worried about
 - whether the authors agree, clarify, partially accommodate, or decline
 - what changed in the manuscript
 - where the change can be found
@@ -54,9 +54,9 @@ A response becomes hard to evaluate when it is unclear whether the manuscript wa
 
 ### General acknowledgement
 
-- "We thank the referee for raising this concern."
+- "We thank the reviewer for raising this concern."
 - "We appreciate this helpful suggestion."
-- "We thank the referee for pointing out this issue."
+- "We thank the reviewer for pointing out this issue."
 
 ### Agree and revise
 
@@ -94,7 +94,7 @@ A response becomes hard to evaluate when it is unclear whether the manuscript wa
 
 ## Common Economics Categories
 
-Common referee comment types include:
+Common reviewer comment types include:
 
 - identification challenge
 - robustness request
@@ -145,7 +145,7 @@ A strong economics response is professional, specific, and non-defensive.
 Avoid the following:
 
 - saying "we revised accordingly" without saying what changed
-- thanking the referee but not answering the substance
+- thanking the reviewer but not answering the substance
 - claiming agreement while making no real revision
 - citing a location that does not clearly contain the described change
 - using vague phrases such as "the manuscript has been improved throughout"
@@ -157,9 +157,9 @@ Avoid the following:
 
 ## Working Rule
 
-A useful referee response should allow a reader to answer five questions quickly:
+A useful reviewer response should allow a reader to answer five questions quickly:
 
-1. What is the referee asking?  
+1. What is the reviewer asking?  
 2. What is the author's stance?  
 3. What is the substantive answer?  
 4. What changed in the manuscript?  
