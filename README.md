@@ -6,7 +6,7 @@ An empirical economics workflow layer for Codex, designed for:
 
 - empirical microeconomics
 - policy evaluation
-- `Stata + Python`
+- `Stata + R`
 - paper drafting, submission QA (quality review), and `R&R` response work
 
 This repository is not a standalone application. It is a workflow pack built around:
