@@ -148,7 +148,7 @@ If those five points are not easy to identify, the response is not yet strong en
 
 ## References to Load On Demand
 
-- `references/referee-response-patterns.md`
+- `references/reviewer-response-patterns.md`
 - `references/review-classification.md`
 - `references/response-strategies.md`
 - `references/tone-guidelines.md`
