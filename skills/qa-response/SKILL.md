@@ -1,14 +1,14 @@
 ---
 name: qa-response
-description: Use when the user wants a strict, adversarial QA loop for an economics or agricultural economics referee response or R&R letter, including comment-coverage checks, manuscript-change traceability review, score-based quality gates, and iterative critic/fixer review before sending the response.
-version: 0.2.0
+description: Use when the user wants a strict, adversarial QA loop for an economics or agricultural economics reviewer response or R&R letter, including comment-coverage checks, manuscript-change traceability review, score-based quality gates, and iterative critic/fixer review before sending the response.
+version: 0.2.1
 ---
 
 # QA Response
 
-Run a repo-native critic/fixer/verifier loop for economics and agricultural economics `response-letter.md` workflows.
+Run a repo-native critic/fixer/verifier loop for economics and agricultural economics `response-writer.md` workflows.
 
-This skill is for strict, adversarial quality control of referee responses and R&R letters.  
+This skill is for strict, adversarial quality control of reviewer responses and R&R letters.  
 Use it when the user wants more than a normal drafting pass and explicitly needs a quality gate, submission-readiness judgment, or multi-round response-review loop.
 
 ## When To Use
@@ -16,7 +16,7 @@ Use it when the user wants more than a normal drafting pass and explicitly needs
 Use this skill when the user wants:
 
 - a final `R&R` response audit
-- a coverage check for many referee comments
+- a coverage check for many reviewer comments
 - a score or pass/fail verdict
 - iterative critic/fixer review before sending the response
 - hard-gate enforcement for coverage, traceability, tone, and revision mapping
@@ -25,19 +25,17 @@ Use `../review-response/SKILL.md` instead when the user primarily wants drafting
 
 ## Core Loop
 
-```text
-Pre-flight
-    ->
-response-critic round 1
-    ->
-response-fixer round 1
-    ->
-artifact-verifier
-    ->
-repeat if needed
-    ->
-stop at APPROVED or STOPPED-NOT-APPROVED
-```
+    Pre-flight
+        ->
+    response-critic round 1
+        ->
+    response-fixer round 1
+        ->
+    artifact-verifier
+        ->
+    repeat if needed
+        ->
+    stop at APPROVED or STOPPED-NOT-APPROVED
 
 Maximum default loop length:
 
@@ -55,9 +53,9 @@ Do not collapse these roles into one generic review step.
 
 Before the loop starts, identify:
 
-- referee comments
+- reviewer comments
 - editor letter if relevant
-- current `response-letter.md`
+- current `response-writer.md`
 - `comment-to-change-map.md`
 - manuscript locations cited in the response
 - appendix / tables / figures cited in the response
@@ -71,7 +69,7 @@ If the response package is too incomplete for adversarial QA, say so and produce
 
 The response cannot be approved while any of these remain unresolved:
 
-- a key referee point is unanswered
+- a key reviewer point is unanswered
 - the response promises a manuscript change that is not traceable
 - the letter and revision map disagree materially
 - the response cites manuscript changes that cannot be located
@@ -86,7 +84,7 @@ When literature support or citation fidelity is materially disputed, use:
 
 QA must prioritize:
 
-- full coverage of referee concerns
+- full coverage of reviewer concerns
 - exact mapping from comment to response
 - exact mapping from response to manuscript change
 - consistency across response letter, revision map, and cited manuscript sections
