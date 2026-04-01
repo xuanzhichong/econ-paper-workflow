@@ -1,12 +1,12 @@
 ---
 name: review-response
-description: Use when the user asks to respond to referee comments, draft an economics or agricultural economics journal revision memo, prepare an R&R response letter, map comments to manuscript changes, or analyze reviewer concerns about identification, robustness, mechanism, exposition, data construction, or claim strength.
-version: 0.4.0
+description: Use when the user asks to respond to reviewer comments, draft an economics or agricultural economics journal revision memo, prepare an R&R response letter, map comments to manuscript changes, or analyze reviewer concerns about identification, robustness, mechanism, exposition, data construction, or claim strength.
+version: 0.4.1
 ---
 
 # Review Response for Economics and Agricultural Economics Journals
 
-Treat this workflow as a journal `referee response / R&R` process by default, not a short conference rebuttal.
+Treat this workflow as a journal `reviewer response / R&R` process by default, not a short conference response.
 
 Use this skill for drafting and revising response letters, organizing comment-to-change traceability, and choosing appropriate response strategies for empirical economics and agricultural economics manuscripts.
 
@@ -25,19 +25,17 @@ Generate additional tracking notes only when they improve coverage, traceability
 
 ## Core Workflow
 
-```text
-Parse referee comments
-    ->
-Classify issue type
-    ->
-Decide response stance
-    ->
-Map each comment to manuscript changes
-    ->
-Draft response letter
-    ->
-Check tone, traceability, and consistency
-```
+    Parse reviewer comments
+        ->
+    Classify issue type
+        ->
+    Decide response stance
+        ->
+    Map each comment to manuscript changes
+        ->
+    Draft response letter
+        ->
+    Check tone, traceability, and consistency
 
 ---
 
@@ -112,7 +110,7 @@ The response letter should usually include:
 - editor-specific note if relevant
 - an optional short closing paragraph
 
-The `comment-to-change-map.md` should be a compact tracking table linking each referee point to:
+The `comment-to-change-map.md` should be a compact tracking table linking each reviewer point to:
 
 - response stance
 - manuscript action
@@ -136,7 +134,7 @@ The `comment-to-change-map.md` should be a compact tracking table linking each r
 
 ## Response Discipline
 
-A strong response should make it easy for the referee or editor to answer:
+A strong response should make it easy for the reviewer or editor to answer:
 
 1. what is the concern?
 2. what is the author’s stance?
@@ -156,7 +154,7 @@ If those five points are not easy to identify, the response is not yet strong en
 - `references/tone-guidelines.md`
 - `references/successful-cases.md`
 
-Use older rebuttal-style templates only after adapting them to journal response style.
+Use older legacy response templates only after adapting them to journal response style.
 
 ---
 
@@ -165,7 +163,7 @@ Use older rebuttal-style templates only after adapting them to journal response 
 Escalate to `qa-response` when any of these are true:
 
 - the draft is near-final and the user wants a go / no-go judgment
-- there are many referee comments and traceability is hard to track manually
+- there are many reviewer comments and traceability is hard to track manually
 - the user wants critic / fixer iteration instead of a one-pass edit
 - the task requires hard gates, scores, or remaining-blocker reporting
 - the user wants a strict final audit of coverage, tone, and response-manuscript consistency
