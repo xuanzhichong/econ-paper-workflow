@@ -2,8 +2,8 @@
 
 The goal is to sound professional, transparent, and calm.
 
-These tone guidelines are for journal `referee response` and `R&R` letters in empirical economics and agricultural economics.  
-They are not for conference rebuttals and not for defensive argument.
+These tone guidelines are for journal `reviewer response` and `R&R` letters in empirical economics and agricultural economics.  
+They are not for conference responses and not for defensive argument.
 
 A strong tone does **not** mean sounding submissive.  
 It means sounding:
@@ -26,7 +26,7 @@ The best tone in a response letter is:
 - honest about limits
 
 The goal is not to “win” the exchange.  
-The goal is to make the referee and editor believe that:
+The goal is to make the reviewer and editor believe that:
 
 1. you understood the concern  
 2. you took it seriously  
@@ -73,9 +73,9 @@ You can be polite while declining a request.
 
 ### General acknowledgement
 
-- "We thank the referee for this helpful comment."
+- "We thank the reviewer for this helpful comment."
 - "We appreciate this constructive suggestion."
-- "We thank the referee for raising this important concern."
+- "We thank the reviewer for raising this important concern."
 
 ### Agree and revise
 
@@ -152,7 +152,7 @@ Avoid:
 
 ## Avoid
 
-- "The referee is wrong."
+- "The reviewer is wrong."
 - "Obviously"
 - "Clearly the reviewer misunderstood."
 - vague promises without a concrete manuscript change
@@ -165,7 +165,7 @@ Avoid:
 
 ## Economics-Specific Reminder
 
-If the referee points to an identification or data concern, respond with:
+If the reviewer points to an identification or data concern, respond with:
 
 - design logic
 - new diagnostics or targeted checks
