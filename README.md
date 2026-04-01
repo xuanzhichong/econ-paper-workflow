@@ -1,4 +1,4 @@
-﻿# Econ Scholar Workflow for Codex
+# Econ Scholar Workflow for Codex
 
 Language: English | [中文](README.zh-CN.md)
 
@@ -54,7 +54,6 @@ Before merging this workflow into Codex, make sure you have:
 
 - [Codex CLI](https://github.com/openai/codex)
 - Git
-- optional: Python plus `uv`
 - optional: Zotero Desktop plus `zotero-mcp` for literature management
 
 ## What This Workflow Assumes
@@ -69,7 +68,8 @@ By default, Codex interprets requests here in an empirical economics context:
 The default stack is:
 
 - literature: `Google Scholar`, `RePEc`, `IDEAS`, `NBER`, `AEA journals`
-- analysis: `Stata` as the primary tool, `Python` for support tasks
+- analysis: `Stata` as the primary tool
+- figures: `R` as the primary tool
 - outputs: `literature-review.md`, `analysis-plan.md`, `regression-spec-matrix.md`, `response-letter.md`
 
 ## Quick Start
@@ -195,7 +195,36 @@ Best for:
 - planning baseline regressions
 - laying out robustness and appendix tables
 
-### Stage 3. Paper Drafting
+### Stage 3. Paper Figures
+
+Use:
+
+- `paper-figures`
+
+Inputs:
+
+- processed `.dta` files exported from `Stata`
+- grouped or collapsed plotting-ready datasets
+- figure sketches or screenshots
+- existing `R` plotting code
+
+Outputs:
+
+- publication-ready figures in `R`
+- `figure-plan.md`
+- `figure-spec-sheet.md`
+- `figure-caption-sheet.md`
+
+Best for:
+
+- descriptive figures
+- development trend figures
+- structure or composition figures
+- map figures
+- multi-panel paper figures
+- revising figures toward a Nature / Nature-subjournal style
+
+### Stage 4. Paper Drafting
 
 Use:
 
@@ -218,7 +247,7 @@ Economics template entrypoint:
 
 - `skills/paper-writing/templates/econ/README.md`
 
-### Stage 4. Submission QA
+### Stage 5. Submission QA
 
 Use:
 
@@ -232,12 +261,12 @@ Use:
 - multiple review-fix rounds
 - hard-gate enforcement before advisor sharing or submission
 
-### Stage 5. R&R and Response Letters
+### Stage 6. R&R and Response Letters
 
 Use:
 
 - `review-response`
-- `rebuttal-writer`
+- `response-writer`
 - `qa-response` for final QA
 
 Default outputs:
@@ -316,6 +345,12 @@ I have a set of do-files and dta files. Reconstruct the data pipeline, identify 
 Use these regression results to draft the Main Results and Empirical Strategy sections in economics-journal style.
 ```
 
+### Produce a paper figure in R
+
+```text
+I have a Stata-processed dta file. Use the paper-figures workflow to help me build a publication-ready descriptive figure in R.
+```
+
 ### Run strict paper QA
 
 ```text
@@ -343,7 +378,8 @@ Currently covered well:
 
 - empirical microeconomics
 - policy evaluation
-- `Stata + Python`
+- `Stata + R`
+- descriptive and publication-ready figure workflows in `R`
 - paper and `R&R` QA loops
 
 Not yet covered deeply:
@@ -351,5 +387,3 @@ Not yet covered deeply:
 - full replication-package audit
 - dedicated critic/fixer for data cleaning
 - theory-economics workflows
-
-
