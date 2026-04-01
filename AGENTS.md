@@ -17,7 +17,7 @@
 - `R` 画图与论文级可视化
 - 中英文论文写作
 - 投稿前自审
-- `referee report / R&R / response letter`
+- `reviewer comments / R&R / response letter`
 
 ---
 
@@ -246,7 +246,7 @@
 
 #### 投稿与审稿关键词
 
-- `referee report`
+- `reviewer report`
 - `R&R`
 - `response letter`
 - `审稿意见`
@@ -268,7 +268,7 @@
 - `results-analysis`：`Stata`-first 数据处理、主回归、稳健性、异质性、机制与表图输出
 - `paper-writing`：经济学实证论文写作
 - `paper-self-review`：投稿前自审
-- `review-response`：期刊 `referee response / R&R`
+- `review-response`：期刊 `reviewer response / R&R`
 - `citation-verification`：核验引用，避免编造文献
 
 #### 严格质量控制场景
@@ -281,7 +281,7 @@
 - `literature-reviewer`：经济学文献综述
 - `data-analyst`：Stata-first 实证分析
 - `paper-miner`：提取经济学论文写作模式
-- `rebuttal-writer`：`R&R response`
+- `response-writer`：`R&R response`
 - `paper-critic`：只读论文批判审查
 - `paper-fixer`：按 critic 问题单修稿
 - `response-critic`：只读 response letter 审查
@@ -630,7 +630,7 @@
 
 ### 审稿回复规范
 
-`review-response` 默认指**期刊审稿回复**，不是 conference rebuttal。
+`review-response` 默认指**期刊审稿回复**，不是 conference response。
 
 回复审稿意见时，优先给出：
 
