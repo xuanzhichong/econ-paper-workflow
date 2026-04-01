@@ -63,9 +63,9 @@ config_file = "~/.codex/agents/literature-reviewer/config.toml"
 description = "Stata-first empirical analysis for regressions, robustness checks, and table planning"
 config_file = "~/.codex/agents/data-analyst/config.toml"
 
-[agents.rebuttal-writer]
-description = "Economics journal referee-response and R&R drafting specialist"
-config_file = "~/.codex/agents/rebuttal-writer/config.toml"
+[agents.response-writer]
+description = "Economics journal reviewer' comments and R&R drafting specialist"
+config_file = "~/.codex/agents/response-writer/config.toml"
 
 [agents.paper-miner]
 description = "Extract empirical economics writing patterns from papers and referee materials"
